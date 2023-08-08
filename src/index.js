@@ -3,15 +3,15 @@ import {task, subTask} from './task.js';
 import { createTask, getTask } from './taskDOM';
 import { project } from './project';
 import { createProject, getProject } from './projectDOM';
-// document.body.appendChild(createTask());
 
 let btnSubmitTask = document.querySelector("button");
 let btnSubmitProject = document.querySelector("form:last-of-type button");
 
+let projectsMain = document.querySelector(".main");
 btnSubmitTask.addEventListener("click", (e) => {
   document.body.appendChild(createTask(getTask()));
 })
 
 btnSubmitProject.addEventListener("click", (e) => {
-  document.body.appendChild(createProject(getProject()));
+  projectsMain.appendChild(createProject(getProject()));
 })
