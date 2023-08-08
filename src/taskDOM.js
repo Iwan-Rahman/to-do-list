@@ -23,3 +23,12 @@ export function createTask(newTask = task("","", new Date(),"Normal")){
   taskNode.appendChild(taskPriority);
   return taskNode;
 }
+
+export function getTask(){
+  let taskName = document.querySelector("#taskName").value;
+  let taskDesc = document.querySelector("#taskDesc").value;
+  let taskDate = document.querySelector("#taskDate").value;
+  let taskPriority = document.querySelector("#taskPriority").value;
+
+  return task(taskName,taskDesc,taskDate,taskPriority);
+}
