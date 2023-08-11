@@ -3,18 +3,21 @@ import {task, subTask} from './task.js';
 import { createTask, getTask } from './taskDOM';
 import { project } from './project';
 import addProject from './projectDOM';
-import { popUpProject } from './popup';
+import { popUpProject, popUpTask} from './popup';
 
 // let btnSubmitTask = document.querySelector("form button");
-let btnSubmitProject = document.querySelector("form:last-of-type button");
+let btnSubmitProject = document.querySelector(".popup:last-of-type button");
 
 
-// btnSubmitTask.addEventListener("click", (e) => {
-//   document.body.appendChild(createTask(getTask()));
-// })
 popUpProject();
+popUpTask();
 btnSubmitProject.addEventListener("click", () => {
-  if(document.querySelector("form").checkValidity()){
+  if(document.querySelector(".popup:last-of-type form").checkValidity()){
     addProject();
   }
 });
+
+let generalProject = document.querySelector(".project:last-of-type");
+generalProject.addEventListener("dblclick", () => {
+document.querySelector(".popup").style.visibility = "visible";
+})

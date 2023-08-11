@@ -38,7 +38,11 @@ export default function addProject(){
 
   if(numProjects.length < 4){
       projectsMain.appendChild(createProject(getProject()));
+      let project = document.querySelector(".project:last-of-type");
+      project.addEventListener("dblclick", () => {
+      document.querySelector(".popup").style.visibility = "visible";
+})
   }
 
-  document.querySelector(".pop-up").style.visibility = "hidden";
+  document.querySelector(".popup:last-of-type").style.visibility = "hidden";
 }
