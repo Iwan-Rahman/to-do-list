@@ -1,4 +1,5 @@
 import { project } from "./project";
+import { createTask, getTask } from "./taskDOM";
 
 export function createProject(newproject = project("","", new Date())){
   let projectNode = document.createElement("div");
@@ -38,11 +39,8 @@ export default function addProject(){
 
   if(numProjects.length < 4){
       projectsMain.appendChild(createProject(getProject()));
-      let project = document.querySelector(".project:last-of-type");
-      project.addEventListener("dblclick", () => {
-      document.querySelector(".popup").style.visibility = "visible";
-})
+      return true;
   }
 
-  document.querySelector(".popup:last-of-type").style.visibility = "hidden";
+  return false;
 }

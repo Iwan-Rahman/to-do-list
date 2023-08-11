@@ -32,3 +32,7 @@ export function getTask(){
 
   return task(taskName,taskDesc,taskDate,taskPriority);
 }
+
+export function addTask(project){
+  project.appendChild(createTask(getTask()));
+}

@@ -158,3 +158,10 @@ form button {
   justify-self: center;
 }
 
+/* Task */
+
+.task {
+  background-color: azure;
+  border-radius: 1rem;
+  border: 0.2rem solid rgb(var(--title-bg-color));
+}
