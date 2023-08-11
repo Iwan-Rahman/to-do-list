@@ -4,6 +4,9 @@ export function createProject(newproject = project("","", new Date())){
   let projectNode = document.createElement("div");
   projectNode.classList.add("project");
 
+  let projectHeader = document.createElement("div");
+  projectHeader.classList.add("project-header");
+
   let projectName = document.createElement("h4");
   projectName.textContent = newproject.getName();
 
@@ -14,9 +17,10 @@ export function createProject(newproject = project("","", new Date())){
   projectDeadline.type = 'date';
   projectDeadline.value = newproject.getDeadline();
 
-  projectNode.appendChild(projectName);
-  projectNode.appendChild(projectDesc);
-  projectNode.appendChild(projectDeadline);
+  projectHeader.appendChild(projectName);
+  projectHeader.appendChild(projectDeadline);
+  projectHeader.appendChild(projectDesc);
+  projectNode.appendChild(projectHeader);
   return projectNode;
 }
 
@@ -26,4 +30,15 @@ export function getProject(){
   let projectDate = document.querySelector("#projectDate").value;
 
   return project(projectName,projectDesc,projectDate);
+}
+
+export default function addProject(){
+  let projectsMain = document.querySelector(".main");
+  let numProjects = document.querySelectorAll(".main > div");
+
+  if(numProjects.length < 4){
+      projectsMain.appendChild(createProject(getProject()));
+  }
+
+  document.querySelector(".pop-up").style.visibility = "hidden";
 }

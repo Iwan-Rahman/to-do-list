@@ -6,6 +6,65 @@
   <title>To Do List</title>
 <script defer src="runtime.js"></script><script defer src="main.js"></script></head>
 <body>
-  <h1>To Do List</h1>
+  <h1>Streamline</h1>
+  <nav>
+    <button>New Project</button>
+    <ul>
+      <li>GRID</li>
+      <li>GRID</li>
+      <li>GRID</li>
+    </ul>
+    <ul>
+      <li><a>About</a></li>
+      <li><a>Settings</a></li>
+      <li><a>Help</a></li>
+    </ul>
+  </nav>
+  <div class="sideboard">
+    <div>
+      <h2>Today</h2>
+      <div></div>
+    </div>
+    <div>
+      <h2>Tomorrow</h2>
+      <div></div>
+    </div>
+    <div>
+      <h2>Projects</h2>
+      <div></div>
+    </div>
+  </div>
+  <div class="main">
+    <div>
+      <h3>General</h3>
+    </div>
+  </div>
+
+  <!-- <div class="pop-up">
+    <form action="" onsubmit="event.preventDefault()">
+      <h2>New Task</h2>
+      <label for="taskName">Name:</label>
+      <input type="text" id="taskName">
+      <label for="taskDesc">Description:</label>
+      <textarea id="taskDesc" rows="10"></textarea>
+      <label for="taskDate">Date:</label>
+      <input type="date" id="taskDate">
+      <label for="taskPriority">Priority:</label>
+      <input type="text" id="taskPriority">
+      <button>New Task</button>
+    </form>
+  </div> -->
+  <div class="pop-up">
+    <form action="" >
+      <h2>New Project</h2>
+      <label for="projectName">Name: </label>
+      <input type="text" id="projectName" name="projectName" required>
+      <label for="projectDesc">Description: </label>
+      <input type="text" id="projectDesc" required>
+      <label for="projectDate">Date: </label>
+      <input type="date" id="projectDate" required>
+      <button>New Project</button>
+    </form>
+  </div>
 </body>
 </html>
