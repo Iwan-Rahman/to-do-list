@@ -15,12 +15,23 @@ export function createTask(newTask = task("","", new Date(),"Normal")){
   taskDeadline.value = newTask.getDeadline();
 
   let taskPriority = document.createElement("div");
-  taskPriority.textContent = newTask.getPriority();
+  switch(newTask.getPriority()){
+    case 'low':
+      taskPriority.style.backgroundColor = 'green';
+      break;
+    case 'moderate':
+      taskPriority.style.backgroundColor = 'yellow';
+      break;
+    case 'high':
+      taskPriority.style.backgroundColor = 'red';
+      break;
+  }
 
   taskNode.appendChild(taskName);
-  taskNode.appendChild(taskDesc);
-  taskNode.appendChild(taskDeadline);
   taskNode.appendChild(taskPriority);
+  taskNode.appendChild(taskDeadline);
+  taskNode.appendChild(taskDesc);
+
   return taskNode;
 }
 

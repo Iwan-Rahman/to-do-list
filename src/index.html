@@ -36,7 +36,9 @@
   </div>
   <div class="main">
     <div class="project">
-      <h3>General</h3>
+      <div class="project-header">
+        <h3>General</h3>
+      </div>
     </div>
   </div>
 
@@ -44,7 +46,7 @@
     <form action="" onsubmit="event.preventDefault()">
       <h2>New Task</h2>
       <label for="taskName">Name:</label>
-      <input type="text" id="taskName" required>
+      <input type="text" id="taskName" maxlength="20" required>
       <label for="taskDesc">Description:</label>
       <textarea id="taskDesc" rows="10"></textarea>
       <label for="taskDate">Date:</label>
@@ -62,7 +64,7 @@
     <form action="" onsubmit="event.preventDefault()">
       <h2>New Project</h2>
       <label for="projectName">Name: </label>
-      <input type="text" id="projectName" required>
+      <input type="text" id="projectName" maxlength="35" required>
       <label for="projectDesc">Description: </label>
       <input type="text" id="projectDesc">
       <label for="projectDate">Date: </label>

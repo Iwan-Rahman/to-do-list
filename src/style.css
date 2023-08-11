@@ -158,10 +158,34 @@ form button {
   justify-self: center;
 }
 
+/* project */
+.project {
+  display: grid;
+  grid-template: 6rem max-content / 1fr;
+  padding: 0rem 1rem;
+  grid-auto-rows: max-content;
+  gap: 0.5rem;
+}
 /* Task */
 
 .task {
   background-color: azure;
   border-radius: 1rem;
   border: 0.2rem solid rgb(var(--title-bg-color));
+  display: flex;
+  justify-content: space-around;
+  padding: 0.2rem;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+}
+
+.task > p {
+  overflow-wrap: break-word;
+  min-width: 8rem;
+}
+.task > div {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
 }
