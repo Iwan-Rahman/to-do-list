@@ -8,16 +8,16 @@
 <body>
   <h1>Streamline</h1>
   <nav>
-    <div>New Project</div>
+    <button>New Project</button>
     <ul>
       <li>GRID</li>
       <li>GRID</li>
       <li>GRID</li>
     </ul>
     <ul>
-      <li>About</li>
-      <li>Settings</li>
-      <li>Help</li>
+      <li><a>About</a></li>
+      <li><a>Settings</a></li>
+      <li><a>Help</a></li>
     </ul>
   </nav>
   <div class="sideboard">
@@ -36,33 +36,37 @@
   </div>
   <div class="main">
     <div>
-      <form action="" onsubmit="event.preventDefault()">
-        <h2>New Task</h2>
-        <label for="taskName">Name: </label>
-        <input type="text" id="taskName">
-        <label for="taskDesc">Description: </label>
-        <input type="text" id="taskDesc">
-        <label for="taskDate">Date: </label>
-        <input type="date" id="taskDate">
-        <label for="taskPriority">Priority</label>
-        <input type="text" id="taskPriority">
-        <button>New Task</button>
-      </form>
-      <form action="" onsubmit="event.preventDefault()">
-        <h2>New Project</h2>
-        <label for="projectName">Name: </label>
-        <input type="text" id="projectName">
-        <label for="projectDesc">Description: </label>
-        <input type="text" id="projectDesc">
-        <label for="projectDate">Date: </label>
-        <input type="date" id="projectDate">
-        <button>New Project</button>
-      </form>
     </div>
-
     <div>
       <h3>General</h3>
     </div>
   </div>
+
+  <div class="pop-up">
+    <form action="" onsubmit="event.preventDefault()">
+      <h2>New Task</h2>
+      <label for="taskName">Name:</label>
+      <input type="text" id="taskName">
+      <label for="taskDesc">Description:</label>
+      <textarea id="taskDesc" rows="10"></textarea>
+      <label for="taskDate">Date:</label>
+      <input type="date" id="taskDate">
+      <label for="taskPriority">Priority:</label>
+      <input type="text" id="taskPriority">
+      <button>New Task</button>
+    </form>
+  </div>
+  <!-- <div class="pop-up">
+    <form action="" onsubmit="event.preventDefault()">
+      <h2>New Project</h2>
+      <label for="projectName">Name: </label>
+      <input type="text" id="projectName">
+      <label for="projectDesc">Description: </label>
+      <input type="text" id="projectDesc">
+      <label for="projectDate">Date: </label>
+      <input type="date" id="projectDate">
+      <button>New Project</button>
+    </form>
+  </div> -->
 </body>
 </html>
