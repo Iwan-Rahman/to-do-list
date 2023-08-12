@@ -29,7 +29,11 @@ let btnSubmitTask = document.querySelector("form button");
 let selectedProject = document.querySelector(".project");
 btnSubmitTask.addEventListener("click", () => {
   if(document.querySelector("form").checkValidity()){
-    alert("selectedProject");
-    selectedProject.appendChild(createTask(getTask()));
+    let task = createTask(getTask());
+    selectedProject.appendChild(task);
+    task.addEventListener("contextmenu", (e) => {
+      e.preventDefault();
+      task.remove();
+    })
   }
 })
