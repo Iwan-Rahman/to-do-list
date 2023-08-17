@@ -22,6 +22,7 @@ export function createProject(newproject = project("","", new Date())){
   projectHeader.appendChild(projectDeadline);
   projectHeader.appendChild(projectDesc);
   projectNode.appendChild(projectHeader);
+  
   return projectNode;
 }
 
@@ -44,3 +45,4 @@ export default function addProject(){
 
   return false;
 }
+

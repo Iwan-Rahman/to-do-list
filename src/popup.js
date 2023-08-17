@@ -18,14 +18,6 @@ export function popUpProject(){
 }
 
 export function popUpTask(){
-  //General Project
-  let generalProject = document.querySelector(".project:last-of-type");
-  generalProject.addEventListener("dblclick", () => {
-  document.querySelector(".popup").style.visibility = "visible";
-  })
-  
-  //Event Listeners for task pop-up form are created with each projectg
-  //Refer to ProjectDOM, addProject
   
   //Close popup form when clicked away from popup form
   document.querySelector(".popup").addEventListener("click", () => {
