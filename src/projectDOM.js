@@ -1,5 +1,6 @@
 import { project } from "./project";
 import { createTask, getTask } from "./taskDOM";
+import {defaultProfile} from "./profile";
 
 export function createProject(projectObj = project("","", new Date())){
   let projectNode = document.createElement("div");
@@ -42,14 +43,13 @@ export default function addProject(){
 
   let projectName = document.createElement("h4");
   projectName.textContent = newProject.projectObj.getName();
-  projectName.style.color = "white";
   projectContainer.appendChild(projectName);
-
+  defaultProfile.projects.push(newProject);
+  
   if(numProjects.length < 4){
       projectsMain.appendChild(newProject.projectNode);
-      return true;
   }
 
-  return false;
+  return newProject;
 }
 

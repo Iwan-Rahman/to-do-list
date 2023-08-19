@@ -4,6 +4,7 @@ import { createTask, deleteTask, getTask, editTask } from './taskDOM';
 import { project } from './project';
 import addProject from './projectDOM';
 import { popUpProject, popUpTask} from './popup';
+import { defaultProfile, updateUpcoming } from './profile';
 
 popUpProject();
 popUpTask();
@@ -23,15 +24,14 @@ btnSubmitProject.addEventListener("click", () => {
   //Checks if all of the html form requirements are filled
   if(document.querySelector(".popup:last-of-type form").checkValidity()){
     //A new project is able to be added to main
-    if(addProject()){
-      let project = document.querySelector(".project:last-of-type");
-      project.addEventListener("dblclick", (e) => {
+      let project  = addProject();
+      project.projectNode.addEventListener("dblclick", (e) => {
       document.querySelector(".popup").style.visibility = "visible";
       selectedProject = project;
       })
     }
   }
-});
+);
 
 
 
@@ -40,24 +40,26 @@ btnSubmitTask.addEventListener("click", () => {
   //Checks if all of the html form requirements are filled
   if(document.querySelector("form").checkValidity()){
     let task = createTask(getTask());
-    task.addEventListener("dblclick", (e) => {
+    task.taskNode.addEventListener("dblclick", (e) => {
       e.stopPropagation();
     })
-    task.addEventListener("mouseenter",(e) => {
-      task.style.backgroundColor = "thistle";
+    task.taskNode.addEventListener("mouseenter",(e) => {
+      task.taskNode.style.backgroundColor = "thistle";
     })
-    task.addEventListener("mouseleave",(e) => {
-      task.style.backgroundColor = "white";
+    task.taskNode.addEventListener("mouseleave",(e) => {
+      task.taskNode.style.backgroundColor = "white";
     })
-    task.addEventListener("click", () => {
-      if(task.style.textDecoration == "line-through"){
-        task.style.textDecoration = "none";
+    task.taskNode.addEventListener("click", () => {
+      if(task.taskNode.style.textDecoration == "line-through"){
+        task.taskNode.style.textDecoration = "none";
       }else{
-        task.style.textDecoration = "line-through";
+        task.taskNode.style.textDecoration = "line-through";
       }
     })
-    selectedProject.appendChild(task);
+    selectedProject.projectNode.appendChild(task.taskNode);
+    selectedProject.projectObj.getTasks().push(task);
     deleteTask(task);
     editTask(task);
+    updateUpcoming(defaultProfile);
   }
 })

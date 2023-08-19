@@ -1,21 +1,21 @@
 import {task, subTask} from './task.js';
 
-export function createTask(newTask = task("","", new Date(),"Normal")){
+export function createTask(taskObj = task("","", new Date(),"Normal")){
   let taskNode = document.createElement("div");
   taskNode.classList.add("task");
 
   let taskName = document.createElement("h4");
-  taskName.textContent = newTask.getName();
+  taskName.textContent = taskObj.getName();
 
   let taskDesc = document.createElement("p");
-  taskDesc.textContent = newTask.getDesc();
+  taskDesc.textContent = taskObj.getDesc();
 
   let taskDeadline = document.createElement("input");
   taskDeadline.type = 'date';
-  taskDeadline.value = newTask.getDeadline();
+  taskDeadline.value = taskObj.getDeadline();
 
   let taskPriority = document.createElement("div");
-  switch(newTask.getPriority()){
+  switch(taskObj.getPriority()){
     case 'low':
       taskPriority.style.backgroundColor = 'green';
       break;
@@ -32,7 +32,7 @@ export function createTask(newTask = task("","", new Date(),"Normal")){
   taskNode.appendChild(taskDeadline);
   taskNode.appendChild(taskDesc);
 
-  return taskNode;
+  return {taskObj, taskNode};
 }
 
 export function getTask(){
@@ -50,29 +50,29 @@ export function addTask(project){
 
 export function deleteTask(task){
       //Deletes the task when right-clicked
-      task.addEventListener("contextmenu", (e) => {
+      task.taskNode.addEventListener("contextmenu", (e) => {
         e.preventDefault();
-        task.remove();
+        task.taskNode.remove();
       })
 }
 
 export function editTask(task){
       //Edit task title
-      task.querySelector("h4").addEventListener("dblclick", (e) => {
+      task.taskNode.querySelector("h4").addEventListener("dblclick", (e) => {
         e.target.contentEditable = "true";
         e.stopPropagation();
         e.target.focus();
       })
   
       //Edit task description
-      task.querySelector("p").addEventListener("dblclick", (e) => {
+      task.taskNode.querySelector("p").addEventListener("dblclick", (e) => {
         e.target.contentEditable = "true";
         e.stopPropagation();
         e.target.focus();
       })
   
       //Edit Priority
-      task.querySelector("div").addEventListener("dblclick",(e) => {
+      task.taskNode.querySelector("div").addEventListener("dblclick",(e) => {
         e.target.insertAdjacentHTML("afterbegin",
         `
         <select>
@@ -86,25 +86,22 @@ export function editTask(task){
         e.target.querySelector("select").focus();
         e.target.addEventListener("focusout", priorityInput)
       })
-      task.addEventListener("focusout", (e) => {
+      task.taskNode.addEventListener("focusout", (e) => {
         e.target.contentEditable = "false";
       })
 
       //Displays a priority select input
       function priorityInput(e){
-        let priority =  task.querySelector("select");
+        let priority =  task.taskNode.querySelector("select");
         switch(priority.value){
           case 'low':
-            alert(priority.value);
-            task.querySelector("div").style.backgroundColor = 'green';
+            task.taskNode.querySelector("div").style.backgroundColor = 'green';
             break;
           case 'moderate':
-            alert(priority.value);
-            task.querySelector("div").style.backgroundColor = 'yellow';
+            task.taskNode.querySelector("div").style.backgroundColor = 'yellow';
             break;
           case 'high':
-            alert(priority.value);
-            task.querySelector("div").style.backgroundColor = 'red';
+            task.taskNode.querySelector("div").style.backgroundColor = 'red';
             break;
         }
         priority.remove();

@@ -62,10 +62,19 @@ nav > ul:last-child {
   grid-row: 2 / 4;
   text-align: center;
   display: grid;
+  gap: 0.2rem;
   background-color: rgb(var(--sideboard-bg-color));
 }
 
 .sideboard h2 {
+  color: white;
+}
+
+.sideboard h4 {
+  color: black;
+}
+
+.sideboard > div:last-of-type h4 {
   color: white;
 }
 
