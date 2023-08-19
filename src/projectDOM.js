@@ -1,7 +1,7 @@
 import { project } from "./project";
 import { createTask, getTask } from "./taskDOM";
 
-export function createProject(newproject = project("","", new Date())){
+export function createProject(projectObj = project("","", new Date())){
   let projectNode = document.createElement("div");
   projectNode.classList.add("project");
 
@@ -9,21 +9,21 @@ export function createProject(newproject = project("","", new Date())){
   projectHeader.classList.add("project-header");
 
   let projectName = document.createElement("h4");
-  projectName.textContent = newproject.getName();
+  projectName.textContent = projectObj.getName();
 
   let projectDesc = document.createElement("p");
-  projectDesc.textContent = newproject.getDesc();
+  projectDesc.textContent = projectObj.getDesc();
 
   let projectDeadline = document.createElement("input");
   projectDeadline.type = 'date';
-  projectDeadline.value = newproject.getDeadline();
+  projectDeadline.value = projectObj.getDeadline();
 
   projectHeader.appendChild(projectName);
   projectHeader.appendChild(projectDeadline);
   projectHeader.appendChild(projectDesc);
   projectNode.appendChild(projectHeader);
   
-  return projectNode;
+  return {projectObj, projectNode};
 }
 
 export function getProject(){
@@ -37,9 +37,16 @@ export function getProject(){
 export default function addProject(){
   let projectsMain = document.querySelector(".main");
   let numProjects = document.querySelectorAll(".main > div");
+  let projectContainer = document.querySelector(".sideboard > div:last-of-type > div");
+  let newProject = createProject(getProject());
+
+  let projectName = document.createElement("h4");
+  projectName.textContent = newProject.projectObj.getName();
+  projectName.style.color = "white";
+  projectContainer.appendChild(projectName);
 
   if(numProjects.length < 4){
-      projectsMain.appendChild(createProject(getProject()));
+      projectsMain.appendChild(newProject.projectNode);
       return true;
   }
 

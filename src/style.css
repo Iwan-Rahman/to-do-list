@@ -69,6 +69,13 @@ nav > ul:last-child {
   color: white;
 }
 
+.sideboard > div:last-of-type > div {
+  margin-top: 0.5rem;
+  display: grid;
+  gap: 0.2rem;
+  overflow-y: auto;
+}
+
 /* Main */
 
 .main {
