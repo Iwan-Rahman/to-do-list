@@ -40,6 +40,22 @@ btnSubmitTask.addEventListener("click", () => {
   //Checks if all of the html form requirements are filled
   if(document.querySelector("form").checkValidity()){
     let task = createTask(getTask());
+    task.addEventListener("dblclick", (e) => {
+      e.stopPropagation();
+    })
+    task.addEventListener("mouseenter",(e) => {
+      task.style.backgroundColor = "thistle";
+    })
+    task.addEventListener("mouseleave",(e) => {
+      task.style.backgroundColor = "white";
+    })
+    task.addEventListener("click", () => {
+      if(task.style.textDecoration == "line-through"){
+        task.style.textDecoration = "none";
+      }else{
+        task.style.textDecoration = "line-through";
+      }
+    })
     selectedProject.appendChild(task);
     deleteTask(task);
     editTask(task);
