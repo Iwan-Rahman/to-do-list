@@ -35,11 +35,11 @@ export function getProject(){
   return project(projectName,projectDesc,projectDate);
 }
 
-export default function addProject(){
+export default function addProject(projectObj = getProject()){
   let projectsMain = document.querySelector(".main");
   let numProjects = document.querySelectorAll(".main > div");
   let projectContainer = document.querySelector(".sideboard > div:last-of-type > div");
-  let newProject = createProject(getProject());
+  let newProject = createProject(projectObj);
 
   let projectName = document.createElement("h4");
   projectName.textContent = newProject.projectObj.getName();

@@ -13,8 +13,9 @@ popUpTask();
 let selectedProject;
 
 //Add tasks to general
-let generalProject = document.querySelector(".project:last-of-type");
-generalProject.addEventListener("dblclick", () => {
+let generalProject = addProject(project("General",""));
+generalProject.projectNode.querySelector("input[type='date']").style.display = 'none';
+generalProject.projectNode.addEventListener("dblclick", () => {
 document.querySelector(".popup").style.visibility = "visible";
 selectedProject = generalProject;
 })
