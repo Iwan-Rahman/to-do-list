@@ -17,8 +17,8 @@ export function task(name,desc,deadline,priority, id){
   let getID = () => id;
 
   let setName = newName => {name = newName}
-  let setDesc = newDesc => {name = newDesc}
-  let setDeadline = newDeadline => {name = newDeadline}
+  let setDesc = newDesc => {desc = newDesc}
+  let setDeadline = newDeadline => {deadline = newDeadline}
   let setPriority = newPriority => {priority = newPriority}
   let setType = (newType) => {type = newType}
   let setID = newID => {

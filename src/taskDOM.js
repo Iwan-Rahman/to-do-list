@@ -101,6 +101,7 @@ export function editTask(task){
         task.taskObj.setName(task.taskNode.querySelector("h4").value);
         task.taskObj.setDesc(task.taskNode.querySelector("p").value);
         task.taskObj.setPriority(task.taskNode.querySelector("div").value);
+        task.taskObj.setDeadline(task.taskNode.querySelector("input[type='date']").value);
         task.taskNode.style.textDecoration = "none";
         updateUpcoming(defaultProfile);
       })
