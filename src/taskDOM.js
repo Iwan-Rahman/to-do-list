@@ -1,4 +1,5 @@
 import {task, subTask} from './task.js';
+import { defaultProfile, updateUpcoming } from './profile';
 
 export function createTask(taskObj = task("","", new Date(),"Normal")){
   let taskNode = document.createElement("div");
@@ -48,11 +49,19 @@ export function addTask(project){
   project.appendChild(createTask(getTask()));
 }
 
-export function deleteTask(task){
+export function deleteTask(task, project){
       //Deletes the task when right-clicked
       task.taskNode.addEventListener("contextmenu", (e) => {
         e.preventDefault();
         task.taskNode.remove();
+        //delete task obj from project
+        let index = project.projectObj.getTasks().findIndex(checkID);
+        project.projectObj.getTasks().splice(index, 1);
+        updateUpcoming(defaultProfile);
+
+        function checkID(currentTask){
+          return currentTask.taskObj.getID() == task.taskObj.getID();
+        }
       })
 }
 

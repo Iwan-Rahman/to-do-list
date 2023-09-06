@@ -27,7 +27,6 @@ export function updateUpcoming(profile){
     
     let n = tasks.length;
     sortByTime(tasks, n);
-    alert(tasks);
     updateUpcomingDOM(tasks, 5);
 }
 

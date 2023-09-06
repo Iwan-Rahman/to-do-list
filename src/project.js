@@ -1,4 +1,4 @@
-export function project(name, desc, deadline){
+export function project(name, desc, deadline, id){
   //Order: Priority-Ordered, Deadline Ordered, Date-Added Ordered 
   let order = "date";
 
@@ -6,6 +6,9 @@ export function project(name, desc, deadline){
   let getDesc = () => desc;
   let getDeadline = () => deadline;
   let getOrder = () => order;
+
+  //unqiue id to quickly identify projects
+  let getId = () => id;
 
   let setName = newName => {name = newName}
   let setDesc = newDesc => {name = newDesc}

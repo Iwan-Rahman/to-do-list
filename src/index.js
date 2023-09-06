@@ -9,11 +9,15 @@ import { defaultProfile, updateUpcoming } from './profile';
 popUpProject();
 popUpTask();
 
+//ID
+let taskId = 0;
+let projectId = 0;
+
 //The current selected project when the new task form is displayed
 let selectedProject;
 
 //Add tasks to general
-let generalProject = addProject(project("General",""));
+let generalProject = addProject(project("General","",'',projectId++));
 generalProject.projectNode.querySelector("input[type='date']").style.display = 'none';
 generalProject.projectNode.addEventListener("dblclick", () => {
 document.querySelector(".popup").style.visibility = "visible";
@@ -26,6 +30,7 @@ btnSubmitProject.addEventListener("click", () => {
   if(document.querySelector(".popup:last-of-type form").checkValidity()){
     //A new project is able to be added to main
       let project  = addProject();
+      project.id = projectId++;
       project.projectNode.addEventListener("dblclick", (e) => {
       document.querySelector(".popup").style.visibility = "visible";
       selectedProject = project;
@@ -41,6 +46,7 @@ btnSubmitTask.addEventListener("click", () => {
   //Checks if all of the html form requirements are filled
   if(document.querySelector("form").checkValidity()){
     let task = createTask(getTask());
+    task.taskObj.setID(taskId++);
     task.taskNode.addEventListener("dblclick", (e) => {
       e.stopPropagation();
     })
@@ -57,10 +63,16 @@ btnSubmitTask.addEventListener("click", () => {
         task.taskNode.style.textDecoration = "line-through";
       }
     })
+
+    //Appends task object to a list of task and a tasknode to the project node
     selectedProject.projectNode.appendChild(task.taskNode);
     selectedProject.projectObj.getTasks().push(task);
-    deleteTask(task);
+
+    //create event listeners to delete and edit task
+    deleteTask(task, selectedProject);
     editTask(task);
+
+    //Update sideboard
     updateUpcoming(defaultProfile);
   }
 })

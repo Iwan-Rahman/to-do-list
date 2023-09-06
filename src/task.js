@@ -1,4 +1,4 @@
-export function task(name,desc,deadline,priority){
+export function task(name,desc,deadline,priority, id){
   
   let dateAdded = new Date();
   
@@ -13,15 +13,24 @@ export function task(name,desc,deadline,priority){
   let getDate = () => dateAdded;
   let getType = () => type;
 
+  //unique id to quickly identify tasks
+  let getID = () => id;
+
   let setName = newName => {name = newName}
   let setDesc = newDesc => {name = newDesc}
   let setDeadline = newDeadline => {name = newDeadline}
   let setPriority = newPriority => {priority = newPriority}
   let setType = (newType) => {type = newType}
+  let setID = newID => {
+    //ID can only be assigned once
+    if(id == undefined){
+      id = newID;
+    }
+  }
 
   let subtasks = [];
   let getSubtasks = () => subtasks;
-  return {getName, getDesc, getDeadline, getPriority, getDate, getSubtasks, getType, setName, setDesc, setDeadline, setPriority, setType}
+  return {getName, getDesc, getDeadline, getPriority, getDate, getSubtasks, getType, getID, setName, setDesc, setDeadline, setPriority, setType, setID}
 }
 
 
