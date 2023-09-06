@@ -97,6 +97,12 @@ export function editTask(task){
       })
       task.taskNode.addEventListener("focusout", (e) => {
         e.target.contentEditable = "false";
+        //update content for task
+        task.taskObj.setName(task.taskNode.querySelector("h4").value);
+        task.taskObj.setDesc(task.taskNode.querySelector("p").value);
+        task.taskObj.setPriority(task.taskNode.querySelector("div").value);
+        task.taskNode.style.textDecoration = "none";
+        updateUpcoming(defaultProfile);
       })
 
       //Displays a priority select input
