@@ -40,7 +40,6 @@ btnSubmitProject.addEventListener("click", () => {
 );
 
 
-
 let btnSubmitTask = document.querySelector("form button");
 btnSubmitTask.addEventListener("click", () => {
   //Checks if all of the html form requirements are filled
