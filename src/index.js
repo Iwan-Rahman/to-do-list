@@ -16,6 +16,26 @@ let projectId = 0;
 //The current selected project when the new task form is displayed
 let selectedProject;
 
+//Change Grid size
+export let gridSize = 4;
+
+let gridBtn = document.querySelectorAll("nav > ul:first-of-type > li");
+
+
+gridBtn[0].addEventListener("click",() => {
+  gridSize = 4
+})
+
+gridBtn[1].addEventListener("click",() => {
+  gridSize = 5
+})
+
+gridBtn[2].addEventListener("click",() => {
+  gridSize = 6
+})
+
+
+
 //Add tasks to general
 let generalProject = addProject(defaultProfile, project("General","",'',projectId++));
 generalProject.projectNode.querySelector("input[type='date']").style.display = 'none';
@@ -80,3 +100,5 @@ btnSubmitTask.addEventListener("click", () => {
     updateUpcoming(defaultProfile);
   }
 })
+
+

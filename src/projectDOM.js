@@ -2,6 +2,7 @@ import { project } from "./project";
 import { createTask, getTask } from "./taskDOM";
 import profile, {defaultProfile, updateUpcoming} from "./profile";
 import {deleteTask} from "./taskDOM";
+import {gridSize} from "./index"
 
 export function createProject(projectObj = project("","", new Date())){
   let projectNode = document.createElement("div");
@@ -46,7 +47,7 @@ export default function addProject(profile = defaultProfile, projectObj = getPro
   projectContainer.appendChild(projectName);
   profile.getProjects().push(newProject);
   console.log(profile.getProjects());
-  if(numProjects.length < 4){
+  if(numProjects.length < gridSize){
       projectsMain.appendChild(newProject.projectNode);
   }
   return newProject;
