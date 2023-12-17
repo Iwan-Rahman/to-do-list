@@ -1,6 +1,6 @@
 import { project } from "./project";
 import { createTask, getTask } from "./taskDOM";
-import profile, {defaultProfile, updateUpcoming} from "./profile";
+import profile, {defaultProfile, updateUpcoming, updateProjects} from "./profile";
 import {deleteTask} from "./taskDOM";
 import {gridSize} from "./index"
 
@@ -61,6 +61,7 @@ export function deleteProject(profile=defaultProfile,project){
     projectContainer.querySelector(`h4:nth-child(${projectIndex+2})`).remove();
     e.preventDefault();
     e.target.remove();
+    updateProjects(profile)
     updateUpcoming(profile);
   })
 }

@@ -1,4 +1,5 @@
 import { task } from "./task";
+import { gridSize } from "./index";
 
 export let profile = (name, email, password) => {
   let getName = () => name;
@@ -61,5 +62,11 @@ function clearUpcomingDOM(){
   let tasks = document.querySelectorAll(".sideboard > div:first-of-type .task");
   for(let task of tasks){
     task.remove();
+  }
+}
+
+export function updateProjects(profile){
+  for(let i = 1; i < profile.getProjects().length && i < gridSize; i++){
+    document.querySelector(".main").appendChild(profile.getProjects()[i].projectNode);
   }
 }
