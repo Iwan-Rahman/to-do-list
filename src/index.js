@@ -2,7 +2,7 @@ import  './style.css';
 import {task, subTask} from './task.js';
 import { createTask, deleteTask, getTask, editTask } from './taskDOM';
 import { project } from './project';
-import addProject, {deleteProject } from './projectDOM';
+import addProject, {deleteProject, viewProject } from './projectDOM';
 import { popUpProject, popUpTask} from './popup';
 import { defaultProfile, updateUpcoming } from './profile';
 
@@ -43,6 +43,9 @@ generalProject.projectNode.addEventListener("dblclick", () => {
 document.querySelector(".popup").style.visibility = "visible";
 selectedProject = generalProject;
 })
+viewProject(defaultProfile, document.querySelector(".sideboard > div:last-of-type h4:last-of-type"));
+
+
 
 let btnSubmitProject = document.querySelector(".popup:last-of-type button");
 btnSubmitProject.addEventListener("click", () => {
@@ -58,6 +61,9 @@ btnSubmitProject.addEventListener("click", () => {
 
       //Create Event Listeners to delete a project
       deleteProject(defaultProfile,project);
+
+      //Add Event Listener to view Project
+      viewProject(defaultProfile, document.querySelector(".sideboard > div:last-of-type h4:last-of-type"));
     }
 
 

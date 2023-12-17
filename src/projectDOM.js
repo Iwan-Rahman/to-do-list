@@ -65,3 +65,33 @@ export function deleteProject(profile=defaultProfile,project){
     updateUpcoming(profile);
   })
 }
+
+
+
+export function viewProject(profile, projectLabel){
+  projectLabel.addEventListener("click", () => {
+    let projectDisplays = document.querySelectorAll('.main > .project');
+    let projectLabels = document.querySelectorAll('.sideboard > div:last-of-type h4');
+    let projectLabelIndex;
+    //Project h4 Index in the sideboard display corresponds to project id
+    for(let i=1; i < projectLabels.length; i++){
+      if(projectLabels[i] == projectLabel){
+        projectLabelIndex = i - 1;
+        break;
+      }
+    }    
+    
+    //Remove all projects in main
+    for(let project of projectDisplays){
+      project.remove();
+    }
+    //Add the project display to main
+    document.querySelector('.main').appendChild(profile.getProjects()[projectLabelIndex].projectNode)
+    
+    let projectDisplay = document.querySelector('.main > div')
+    //Add all of the tasks in the project to the display
+    for(let task of profile.getProjects()[projectLabelIndex].projectObj.getTasks()){
+      projectDisplay.appendChild(task.taskNode);
+    }
+  })
+}

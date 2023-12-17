@@ -45,7 +45,12 @@ ul {
   list-style-type: none;
   display: flex;
   justify-content: space-evenly;
+  align-items: center;
   gap: 1rem;
+}
+
+nav svg {
+  display: flex;
 }
 
 nav > ul:last-child {
@@ -57,7 +62,6 @@ nav > ul:last-child {
 nav > button, nav > ul > li {
   cursor: pointer;
 }
-
 /* Sideboard */
 
 .sideboard {
@@ -76,6 +80,7 @@ nav > button, nav > ul > li {
 
 .sideboard h4 {
   color: black;
+  cursor: pointer;
 }
 
 .sideboard > div:last-of-type h4 {
