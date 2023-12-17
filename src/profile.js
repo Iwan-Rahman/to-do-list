@@ -6,6 +6,7 @@ export let profile = (name, email, password) => {
   let getPassword = () => password;
 
   let projects = [];
+  let getProjects = () => projects
   let getAllTasks = () => {
     let tasks = [];
     for(let project of projects){
@@ -15,7 +16,7 @@ export let profile = (name, email, password) => {
     return tasks;
   }
   
-  return {getName, getEmail, getPassword, projects, getAllTasks}
+  return {getName, getEmail, getPassword, getProjects, getAllTasks,projects}
 }
 
 export let defaultProfile = profile("User", "fake.email@fakemail.com", "");

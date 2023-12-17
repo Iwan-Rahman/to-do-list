@@ -2,7 +2,7 @@ import  './style.css';
 import {task, subTask} from './task.js';
 import { createTask, deleteTask, getTask, editTask } from './taskDOM';
 import { project } from './project';
-import addProject from './projectDOM';
+import addProject, {deleteProject } from './projectDOM';
 import { popUpProject, popUpTask} from './popup';
 import { defaultProfile, updateUpcoming } from './profile';
 
@@ -17,7 +17,7 @@ let projectId = 0;
 let selectedProject;
 
 //Add tasks to general
-let generalProject = addProject(project("General","",'',projectId++));
+let generalProject = addProject(defaultProfile, project("General","",'',projectId++));
 generalProject.projectNode.querySelector("input[type='date']").style.display = 'none';
 generalProject.projectNode.addEventListener("dblclick", () => {
 document.querySelector(".popup").style.visibility = "visible";
@@ -35,7 +35,12 @@ btnSubmitProject.addEventListener("click", () => {
       document.querySelector(".popup").style.visibility = "visible";
       selectedProject = project;
       })
+
+      //Create Event Listeners to delete a project
+      deleteProject(defaultProfile,project);
     }
+
+
   }
 );
 

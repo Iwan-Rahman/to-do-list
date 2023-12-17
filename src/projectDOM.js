@@ -1,6 +1,7 @@
 import { project } from "./project";
 import { createTask, getTask } from "./taskDOM";
-import {defaultProfile} from "./profile";
+import profile, {defaultProfile, updateUpcoming} from "./profile";
+import {deleteTask} from "./taskDOM";
 
 export function createProject(projectObj = project("","", new Date())){
   let projectNode = document.createElement("div");
@@ -35,21 +36,30 @@ export function getProject(){
   return project(projectName,projectDesc,projectDate);
 }
 
-export default function addProject(projectObj = getProject()){
+export default function addProject(profile = defaultProfile, projectObj = getProject()){
   let projectsMain = document.querySelector(".main");
   let numProjects = document.querySelectorAll(".main > div");
   let projectContainer = document.querySelector(".sideboard > div:last-of-type > div");
   let newProject = createProject(projectObj);
-
   let projectName = document.createElement("h4");
   projectName.textContent = newProject.projectObj.getName();
   projectContainer.appendChild(projectName);
-  defaultProfile.projects.push(newProject);
-  
+  profile.getProjects().push(newProject);
+  console.log(profile.getProjects());
   if(numProjects.length < 4){
       projectsMain.appendChild(newProject.projectNode);
   }
-
   return newProject;
 }
 
+export function deleteProject(profile=defaultProfile,project){
+  project.projectNode.addEventListener("contextmenu",(e) => {
+    let projectIndex = profile.getProjects().indexOf(project)
+    profile.getProjects().splice(projectIndex,1);
+    let projectContainer = document.querySelector(".sideboard > div:last-of-type > div");
+    projectContainer.querySelector(`h4:nth-child(${projectIndex+2})`).remove();
+    e.preventDefault();
+    e.target.remove();
+    updateUpcoming(profile);
+  })
+}

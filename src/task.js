@@ -27,16 +27,5 @@ export function task(name,desc,deadline,priority, id){
       id = newID;
     }
   }
-
-  let subtasks = [];
-  let getSubtasks = () => subtasks;
-  return {getName, getDesc, getDeadline, getPriority, getDate, getSubtasks, getType, getID, setName, setDesc, setDeadline, setPriority, setType, setID}
-}
-
-
-export function subtask(name){
-  let getName = () => name;
-  let setName = (newName) => {name = newName}
-
-  return {getName, setName}
+  return {getName, getDesc, getDeadline, getPriority, getDate, getType, getID, setName, setDesc, setDeadline, setPriority, setType, setID}
 }
