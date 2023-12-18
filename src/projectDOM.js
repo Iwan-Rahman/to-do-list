@@ -4,7 +4,7 @@ import profile, {defaultProfile, updateUpcoming, updateProjects} from "./profile
 import {deleteTask} from "./taskDOM";
 import {gridSize, getDashboard, setDashboard} from "./index"
 
-export function createProject(projectObj = project("","", new Date())){
+export function createProject(projectObj = project("")){
   let projectNode = document.createElement("div");
   projectNode.classList.add("project");
 
@@ -14,16 +14,7 @@ export function createProject(projectObj = project("","", new Date())){
   let projectName = document.createElement("h4");
   projectName.textContent = projectObj.getName();
 
-  let projectDesc = document.createElement("p");
-  projectDesc.textContent = projectObj.getDesc();
-
-  let projectDeadline = document.createElement("input");
-  projectDeadline.type = 'date';
-  projectDeadline.value = projectObj.getDeadline();
-
   projectHeader.appendChild(projectName);
-  projectHeader.appendChild(projectDeadline);
-  projectHeader.appendChild(projectDesc);
   projectNode.appendChild(projectHeader);
   
   return {projectObj, projectNode};
@@ -31,10 +22,8 @@ export function createProject(projectObj = project("","", new Date())){
 
 export function getProject(){
   let projectName = document.querySelector("#projectName").value;
-  let projectDesc = document.querySelector("#projectDesc").value;
-  let projectDate = document.querySelector("#projectDate").value;
 
-  return project(projectName,projectDesc,projectDate);
+  return project(projectName);
 }
 
 export default function addProject(profile = defaultProfile, projectObj = getProject()){
@@ -129,13 +118,6 @@ export function editProject(profile=defaultProfile, project){
     e.target.focus();
   })
 
-  //Edit project description
-    project.projectNode.querySelector("p").addEventListener("dblclick", (e) => {
-    e.target.contentEditable = "true";
-    e.stopPropagation();
-    e.target.focus();
-  })
-
   //Project h4 Index in the sideboard display
   let projectIndex  = profile.getProjects().indexOf(project) + 2;
   let projectLabel = document.querySelector(`.sideboard > div:last-of-type h4:nth-of-type(${projectIndex})`);
@@ -146,7 +128,5 @@ export function editProject(profile=defaultProfile, project){
     //update content for task
     project.projectObj.setName(project.projectNode.querySelector("h4").textContent);
     projectLabel.textContent = project.projectObj.getName();
-    project.projectObj.setDesc(project.projectNode.querySelector("p").textContent);
-    project.projectObj.setDeadline(project.projectNode.querySelector("input[type='date']").value);
   }) 
 }

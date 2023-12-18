@@ -63,7 +63,6 @@ gridBtn[2].addEventListener("click",() => {
 
 //Add tasks to general
 let generalProject = addProject(defaultProfile, project("General","",'',projectId++));
-generalProject.projectNode.querySelector("input[type='date']").style.display = 'none';
 generalProject.projectNode.addEventListener("dblclick", () => {
 document.querySelector(".popup").style.visibility = "visible";
 selectedProject = generalProject;
