@@ -66,12 +66,12 @@ export function deleteProject(profile=defaultProfile,project){
   })
 }
 
-export function viewProject(profile, projectLabel){
+export function viewProject(profile=defaultProfile, projectLabel){
   projectLabel.addEventListener("click", () => {
     let projectDisplays = document.querySelectorAll('.main > .project');
     let projectLabels = document.querySelectorAll('.sideboard > div:last-of-type h4');
     let projectLabelIndex;
-    //Project h4 Index in the sideboard display corresponds to project id
+    //Project h4 Index in the sideboard display
     for(let i=1; i < projectLabels.length; i++){
       if(projectLabels[i] == projectLabel){
         projectLabelIndex = i - 1;
@@ -94,4 +94,35 @@ export function viewProject(profile, projectLabel){
 
     setDashboard(false);
   })
+}
+
+export function editProject(profile=defaultProfile, project){
+  //Edit project title
+  project.projectNode.querySelector("h4").addEventListener("dblclick", (e) => {
+    e.target.contentEditable = "true";
+    e.stopPropagation();
+    e.target.focus();
+  })
+
+  //Edit project description
+    project.projectNode.querySelector("p").addEventListener("dblclick", (e) => {
+    e.target.contentEditable = "true";
+    e.stopPropagation();
+    e.target.focus();
+  })
+
+  //Project h4 Index in the sideboard display
+  let projectIndex  = profile.getProjects().indexOf(project) + 2;
+  let projectLabel = document.querySelector(`.sideboard > div:last-of-type h4:nth-of-type(${projectIndex})`);
+
+  
+  project.projectNode.addEventListener("focusout", (e) => {
+    e.target.contentEditable = "false";
+    //update content for task
+    project.projectObj.setName(project.projectNode.querySelector("h4").textContent);
+    projectLabel.textContent = project.projectObj.getName();
+    project.projectObj.setDesc(project.projectNode.querySelector("p").textContent);
+    project.projectObj.setDeadline(project.projectNode.querySelector("input[type='date']").value);
+  }) 
+  
 }
