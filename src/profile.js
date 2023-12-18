@@ -50,8 +50,8 @@ function sortByTime(tasks, n){
 //Requires number of tasks to display in DOM
 function updateUpcomingDOM(tasks, n){
   clearUpcomingDOM();
-  n = tasks.length > 5 ? 5 : tasks.length;
-  let upcoming = document.querySelector(".sideboard > div")
+  n = tasks.length > 3 ? 3 : tasks.length;
+  let upcoming = document.querySelector(".sideboard > div > div")
   for(let i = 0 ; i < n; i++){
     let taskCopy = tasks[i].taskNode.cloneNode(true);
     upcoming.appendChild(taskCopy);
@@ -70,3 +70,4 @@ export function updateProjects(profile){
     document.querySelector(".main").appendChild(profile.getProjects()[i].projectNode);
   }
 }
+
