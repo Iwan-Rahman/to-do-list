@@ -4,7 +4,7 @@ import { createTask, deleteTask, getTask, editTask } from './taskDOM';
 import { project } from './project';
 import addProject, {deleteProject, viewProject } from './projectDOM';
 import { popUpProject, popUpTask} from './popup';
-import { defaultProfile, updateUpcoming } from './profile';
+import { defaultProfile, updateProjects, updateUpcoming } from './profile';
 
 popUpProject();
 popUpTask();
@@ -13,6 +13,31 @@ popUpTask();
 let taskId = 0;
 let projectId = 0;
 
+
+//Dashboard View
+let dashboardView = true;
+export let getDashboard = () => dashboardView;
+export let setDashboard = (bool) => {dashboardView = bool};
+
+//Set Dashboard Listener
+let viewDashboard = ((profile) => {
+  document.querySelector('.sideboard > div:last-of-type h4').addEventListener("click",() => {
+    let projectDisplays = document.querySelectorAll('.main > .project');
+    //Remove all projects in main
+    for(let project of projectDisplays){
+      project.remove();
+    }
+
+    //Create Dashboard View
+    let projectDisplay = document.querySelector('.main').appendChild(generalProject.projectNode);
+    //Add all of the tasks in the project to the display
+    for(let task of generalProject.projectObj.getTasks()){
+      projectDisplay.appendChild(task.taskNode);
+    }
+    updateProjects(profile)
+    setDashboard(true);
+  })
+})(defaultProfile);
 //The current selected project when the new task form is displayed
 let selectedProject;
 
@@ -65,8 +90,6 @@ btnSubmitProject.addEventListener("click", () => {
       //Add Event Listener to view Project
       viewProject(defaultProfile, document.querySelector(".sideboard > div:last-of-type h4:last-of-type"));
     }
-
-
   }
 );
 
@@ -106,5 +129,3 @@ btnSubmitTask.addEventListener("click", () => {
     updateUpcoming(defaultProfile);
   }
 })
-
-
