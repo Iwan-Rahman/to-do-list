@@ -2,7 +2,7 @@ import  './style.css';
 import {task, subTask} from './task.js';
 import { createTask, deleteTask, getTask, editTask } from './taskDOM';
 import { project } from './project';
-import addProject, {deleteProject, editProject, viewProject } from './projectDOM';
+import addProject, {deleteProject, deleteProjectFromLabel, editProject, viewProject } from './projectDOM';
 import { popUpProject, popUpTask} from './popup';
 import { defaultProfile, updateProjects, updateUpcoming } from './profile';
 
@@ -87,6 +87,7 @@ btnSubmitProject.addEventListener("click", () => {
       //Create Event Listeners to delete/edit a project
       deleteProject(defaultProfile,project);
       editProject(defaultProfile,project);
+      deleteProjectFromLabel(defaultProfile,document.querySelector(".sideboard > div:last-of-type h4:last-of-type"));
       //Add Event Listener to view Project
       viewProject(defaultProfile, document.querySelector(".sideboard > div:last-of-type h4:last-of-type"));
     }

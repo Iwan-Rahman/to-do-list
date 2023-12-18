@@ -74,7 +74,7 @@ export function viewProject(profile=defaultProfile, projectLabel){
     //Project h4 Index in the sideboard display
     for(let i=1; i < projectLabels.length; i++){
       if(projectLabels[i] == projectLabel){
-        projectLabelIndex = i - 1;
+        projectLabelIndex = i - 1;  //ignore dashboard label
         break;
       }
     }    
@@ -94,6 +94,31 @@ export function viewProject(profile=defaultProfile, projectLabel){
 
     setDashboard(false);
   })
+}
+
+export function deleteProjectFromLabel(profile=defaultProfile,projectLabel){
+    projectLabel.addEventListener("contextmenu", (e) => {
+    let projectDisplays = document.querySelectorAll('.main > .project');
+    let projectLabels = document.querySelectorAll('.sideboard > div:last-of-type h4');
+    let projectLabelIndex;
+    //Project h4 Index in the sideboard display
+    for(let i=2; i < projectLabels.length; i++){
+      if(projectLabels[i] == projectLabel){
+        projectLabelIndex = i - 1; //shift left to 0 index
+        break;
+      }
+    }
+    projectLabel.remove();
+    //remove project from main
+    for(let project of projectDisplays){
+      if(project == projectDisplays[projectLabelIndex]){
+        project.remove();
+        break
+      }
+    }
+    profile.getProjects().splice(projectLabelIndex,1)
+    e.preventDefault();
+})
 }
 
 export function editProject(profile=defaultProfile, project){
@@ -124,5 +149,4 @@ export function editProject(profile=defaultProfile, project){
     project.projectObj.setDesc(project.projectNode.querySelector("p").textContent);
     project.projectObj.setDeadline(project.projectNode.querySelector("input[type='date']").value);
   }) 
-  
 }
