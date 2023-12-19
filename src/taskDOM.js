@@ -53,6 +53,7 @@ export function deleteTask(task, project){
       //Deletes the task when right-clicked
       task.taskNode.addEventListener("contextmenu", (e) => {
         e.preventDefault();
+        e.stopPropagation();
         task.taskNode.remove();
         //delete task obj from project
         let index = project.projectObj.getTasks().findIndex(checkID);

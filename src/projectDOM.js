@@ -35,7 +35,6 @@ export default function addProject(profile = defaultProfile, projectObj = getPro
   projectName.textContent = newProject.projectObj.getName();
   projectContainer.appendChild(projectName);
   profile.getProjects().push(newProject);
-  console.log(profile.getProjects());
   if(numProjects.length < gridSize && getDashboard() == true){
       projectsMain.appendChild(newProject.projectNode);
   }
@@ -107,6 +106,10 @@ export function deleteProjectFromLabel(profile=defaultProfile,projectLabel){
     }
     profile.getProjects().splice(projectLabelIndex,1)
     e.preventDefault();
+    if(getDashboard() == true){
+      updateProjects(profile);
+    }
+    updateUpcoming(profile);
 })
 }
 

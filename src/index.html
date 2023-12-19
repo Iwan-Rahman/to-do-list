@@ -15,8 +15,8 @@
       <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1.2rem"><title>numeric-6-box-outline</title><path d="M11,13H13V15H11M11,17H13A2,2 0 0,0 15,15V13C15,11.89 14.1,11 13,11H11V9H15V7H11A2,2 0 0,0 9,9V15C9,16.11 9.9,17 11,17M19,19H5V5H19M19,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3Z" fill="white"/></svg></li>
     </ul>
     <ul>
-      <li><a>About</a></li>
-      <li><a>Settings</a></li>
+      <li><a>Classic</a></li>
+      <li><a>Mono</a></li>
       <li><a>Help</a></li>
     </ul>
   </nav>
@@ -60,6 +60,35 @@
       <input type="text" id="projectName" maxlength="35" required>
       <button type="submit">New Project</button>
     </form>
+  </div>
+  <div class="popup">
+    <div>
+      <div class="header">
+        <h2>Help</h2>
+        <h3><a href="#helpAdd">Click to Add</a></h3>
+        <h3><a href="#helpEdit">Click to Edit</a></h3>
+        <h3><a href="#helpDelete">Click to Delete</a></h3>
+      </div>
+      <div class="content">  
+        <h3 id="helpAdd">Adding a project</h3>
+        <p>Create a new project by clicking on "New Project" in the nav bar</p>
+        <h3>Adding a task</h3>
+        <p>Double click on a project to bring up the "New Task" popup. Fill in the Name and
+          click "New Task" to add the task to the project</p>
+        <h3 id="helpEdit">Editing a Project</h3>
+        <p>Double click on the Project Name to edit its name</p>
+        <h3>Editing a Task</h3>
+        <p>Double click on the task name, description or priority to edit the chosen property.
+          Dates can be changed by clicking on the date selection box</p>
+        <h3>Finishing a Task</h3>
+        <p>Click on the finished task to cross it off</p>
+        <h3 id="helpDelete">Deleting a Task</h3>
+        <p>Right click on the chosen task to delete it.</p>
+        <h3>Deleting a Project</h3>
+        <p>Right click on the project (must not hover over a task) to delete it</p>
+      </div>
+    </div>
+
   </div>
 </body>
 </html>

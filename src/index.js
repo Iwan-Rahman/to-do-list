@@ -3,11 +3,12 @@ import {task, subTask} from './task.js';
 import { createTask, deleteTask, getTask, editTask } from './taskDOM';
 import { project } from './project';
 import addProject, {deleteProject, deleteProjectFromLabel, editProject, viewProject } from './projectDOM';
-import { popUpProject, popUpTask} from './popup';
+import { popupProject, popupTask, closePopups, popUpHelp} from './popup';
 import { defaultProfile, updateProjects, updateUpcoming } from './profile';
 
-popUpProject();
-popUpTask();
+popupProject();
+closePopups();
+popUpHelp();
 
 //ID
 let taskId = 0;
@@ -71,18 +72,14 @@ viewProject(defaultProfile, document.querySelector(".sideboard > div:last-of-typ
 
 
 
-let btnSubmitProject = document.querySelector(".popup:last-of-type button");
+let btnSubmitProject = document.querySelector(".popup:nth-of-type(4) button");
 btnSubmitProject.addEventListener("click", () => {
   //Checks if all of the html form requirements are filled
-  if(document.querySelector(".popup:last-of-type form").checkValidity()){
+  if(document.querySelector(".popup:nth-of-type(4) form").checkValidity()){
     //A new project is able to be added to main
       let project  = addProject();
       project.id = projectId++;
-      project.projectNode.addEventListener("dblclick", (e) => {
-      document.querySelector(".popup").style.visibility = "visible";
-      selectedProject = project;
-      })
-
+      popUpTask(project.projectNode);
       //Create Event Listeners to delete/edit a project
       deleteProject(defaultProfile,project);
       editProject(defaultProfile,project);
