@@ -1,6 +1,8 @@
 * {
   padding: 0;
   margin: 0;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }
 
 :root{
@@ -12,6 +14,11 @@
   --pastel-red: 227, 130, 130;
   --pastel-yellow: 209, 176, 91;
 }
+
+::-webkit-scrollbar {
+  display: none;
+}
+
 
 body {
   width: 100%;
@@ -105,7 +112,6 @@ nav button {
   grid-auto-columns: repeat(auto-fit, minmax(25%,1fr));
   grid-auto-rows: minmax(50%,1fr);
   text-align: center;
-  background-color: rgb(var(--sideboard-bg-color),0.5);
   user-select: none;
 }
 
@@ -141,7 +147,12 @@ nav button {
   background-color: rgb(var(--pastel-yellow));
 }
 
-/* Pop-Ups c: */
+.main h4 {
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+
+/* Pop-Ups */
 
 .popup {
   position: fixed;
@@ -226,16 +237,18 @@ form button {
   text-decoration: none;
 }
 .popup > div {
-  background-color: black;
+  background-color: rgb(var(--title-bg-color));
   color: whitesmoke;
   padding: 1rem;
   overflow: auto;
-  height: 100vh;
+  height: 98vh;
   width: 60vw;
   box-sizing: border-box;
   scroll-behavior: smooth;
+  border: 1rem solid rgb(var(--sideboard-bg-color));
+  border-radius: 1rem;
 }
-.popup> div h2 {
+.popup > div h2 {
   margin-bottom: 1rem;
   text-align: center;
   font-size: 2rem;
@@ -274,4 +287,61 @@ form button {
   width: 60%;
   height: auto;
   margin: 0.1rem;
+}
+
+
+/* Mono Theme */
+.mono h1 {
+  background-color: black;
+  color: whitesmoke;
+}
+
+.mono nav {
+  background-color: whitesmoke;
+  color: black;
+  border: 1px solid black;
+}
+
+.mono .sideboard{
+  background-color: whitesmoke;
+  border: 1px solid black;
+}
+
+.mono .sideboard h2, body.mono .sideboard h4, body.mono .sideboard > div:last-of-type h4 {
+  color: black;
+}
+
+.mono .main > .project {
+  background-color: rgb(48, 48,48);
+  border: 1px solid black;
+}
+
+.mono .popup form {
+  background-color: black;
+  color: whitesmoke;
+  border: 1rem solid whitesmoke;
+}
+
+.mono .main h4 {
+  color: whitesmoke;
+}
+
+.mono .task {
+  background-color: black;
+  border: 0.2rem solid whitesmoke;
+}
+
+.mono .sideboard .task {
+  background-color: whitesmoke;
+  border: 0.2rem solid black;
+}
+
+.mono .popup > div {
+  background-color: black;
+  color: whitesmoke;
+  border: 1rem solid whitesmoke;
+}
+
+.mono svg {
+  fill: black;
 }

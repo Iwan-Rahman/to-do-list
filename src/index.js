@@ -138,7 +138,17 @@ btnSubmitTask.addEventListener("click", () => {
   }
 })
 
+//Change Themes
+let classic = document.querySelector('nav > ul:last-of-type > li')
+let mono = document.querySelector('nav > ul:last-of-type > li + li');
 
+classic.addEventListener("click", () => {
+  document.body.classList.remove('mono');
+})
+
+mono.addEventListener("click", () => {
+  document.body.classList.add('mono');
+})
 //Help View
 
 const addProjectGIF = new Image();
