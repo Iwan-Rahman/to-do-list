@@ -36,7 +36,6 @@ export function closePopups(){
 export function popupTask(projectNode){
   projectNode.addEventListener("dblclick", (e) => {
     document.querySelector(".popup").style.visibility = "visible";
-    selectedProject = project;
     })
 }
 

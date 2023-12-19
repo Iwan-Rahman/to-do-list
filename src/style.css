@@ -229,10 +229,49 @@ form button {
   background-color: black;
   color: whitesmoke;
   padding: 1rem;
+  overflow: auto;
+  height: 100vh;
+  width: 60vw;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
 }
 .popup> div h2 {
   margin-bottom: 1rem;
+  text-align: center;
+  font-size: 2rem;
 }
 .popup > div > div.header {
   margin-bottom: 3rem;
+}
+
+.header > h3 {
+  font-style:italic;
+  font-size: 1.5rem;
+  margin-left: 1rem;
+}
+.header > h3 + h3 {
+  margin-left: 3rem;
+}
+
+.header > h3 + h3 + h3 {
+  margin-left: 5rem;
+}
+
+.help-content h3 {
+  margin: 1rem;
+}
+.help-content div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column-reverse;
+  text-align: center;
+}
+
+
+.help-content img, .help-content p {
+  width: 60%;
+  height: auto;
+  margin: 0.1rem;
 }

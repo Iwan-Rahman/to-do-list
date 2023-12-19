@@ -6,6 +6,16 @@ import addProject, {deleteProject, deleteProjectFromLabel, editProject, viewProj
 import { popupProject, popupTask, closePopups, popUpHelp} from './popup';
 import { defaultProfile, updateProjects, updateUpcoming } from './profile';
 
+//videos
+import AddProjectVid from './videos/AddProject.gif';
+import AddTaskVid from './videos/addTask.gif';
+import EditProjectVid from './videos/EditProject.gif';
+import EditTaskVid from './videos/EditTask.gif';
+import FinishTaskVid from './videos/FinishTask.gif';
+import ViewProjectVid from './videos/ViewProject.gif';
+import DeleteProjectVid from './videos/DeleteProject.gif';
+import DeleteTaskVid from './videos/DeleteTask.gif';
+
 popupProject();
 closePopups();
 popUpHelp();
@@ -79,7 +89,8 @@ btnSubmitProject.addEventListener("click", () => {
     //A new project is able to be added to main
       let project  = addProject();
       project.id = projectId++;
-      popUpTask(project.projectNode);
+      popupTask(project.projectNode);
+      selectedProject = project;
       //Create Event Listeners to delete/edit a project
       deleteProject(defaultProfile,project);
       editProject(defaultProfile,project);
@@ -126,3 +137,40 @@ btnSubmitTask.addEventListener("click", () => {
     updateUpcoming(defaultProfile);
   }
 })
+
+
+//Help View
+
+const addProjectGIF = new Image();
+addProjectGIF.src = AddProjectVid
+document.querySelector('#helpAdd + div').appendChild(addProjectGIF);
+
+const addTaskGIF = new Image();
+addTaskGIF.src = AddTaskVid;
+document.querySelector('#helpAdd + div + h3 + div').appendChild(addTaskGIF);
+
+const editProjectGIF = new Image();
+editProjectGIF.src = EditProjectVid;
+document.querySelector("#helpEdit + div").appendChild(editProjectGIF);
+
+const editTaskGIF = new Image();
+editTaskGIF.src = EditTaskVid;
+document.querySelector('#helpEdit + div + h3 + div').appendChild(editTaskGIF);
+
+const finishTaskGIF = new Image();
+finishTaskGIF.src = FinishTaskVid;
+document.querySelector(`#helpEdit + div${" + h3 + div".repeat(2)}`).appendChild(finishTaskGIF);
+
+
+const viewProjectGIF = new Image();
+viewProjectGIF.src = ViewProjectVid;
+document.querySelector(`#helpEdit + div${" + h3 + div".repeat(3)}`).appendChild(viewProjectGIF);
+
+const deleteProjectGIF = new Image();
+deleteProjectGIF.src = DeleteProjectVid;
+document.querySelector('#helpDelete + div').appendChild(deleteProjectGIF);
+
+const deleteTaskGIF = new Image();
+deleteTaskGIF.src = DeleteTaskVid;
+document.querySelector('#helpDelete + div + h3 + div').appendChild(deleteTaskGIF);
+
