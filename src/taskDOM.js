@@ -2,7 +2,7 @@ import {task} from './task.js';
 import { defaultProfile, setLocalStorage, updateUpcoming} from './profile';
 import {getTaskID , incTaskID} from './index.js';
 
-export function createTask(taskObj = task("","", new Date(),"Normal")){
+export function createTask(taskObj = task("","", new Date(),"low",getTaskID(),false)){
   let taskNode = document.createElement("div");
   taskNode.classList.add("task");
 
@@ -43,7 +43,7 @@ export function getTask(){
   let taskDate = document.querySelector("#taskDate").value;
   let taskPriority = document.querySelector("#taskPriority").value;
 
-  return task(taskName,taskDesc,taskDate,taskPriority);
+  return task(taskName,taskDesc,taskDate,taskPriority,getTaskID(),false);
 }
 
 export function addTask(task,project){
@@ -54,10 +54,19 @@ export function addTask(task,project){
   task.taskNode.addEventListener("click", () => {
     if(task.taskNode.style.textDecoration == "line-through"){
       task.taskNode.style.textDecoration = "none";
+      task.taskObj.setStatus(false);
+      setLocalStorage(defaultProfile);
     }else{
       task.taskNode.style.textDecoration = "line-through";
+      task.taskObj.setStatus(true);
+      setLocalStorage(defaultProfile);
     }
   })
+
+  //check line through
+  if(task.taskObj.getStatus() == true){
+    task.taskNode.style.textDecoration = "line-through";
+  }
   
   //Appends task object to a list of task and a tasknode to the project node
   project.projectNode.appendChild(task.taskNode);

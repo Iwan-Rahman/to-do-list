@@ -87,12 +87,14 @@ export function setLocalStorage(profile){
   let taskDescs = tasks.map((x) => x.taskObj.getDesc());
   let taskPriorities = tasks.map((x) => x.taskObj.getPriority());
   let taskDeadlines = tasks.map((x) => x.taskObj.getDeadline());
+  let taskStatus = tasks.map((x) => x.taskObj.getStatus());
   localStorage.setItem('theme',document.body.classList.value);
   localStorage.setItem('projectNames',projectNames);
   localStorage.setItem('taskNames',taskNames);
   localStorage.setItem('taskDescs',taskDescs);
   localStorage.setItem('taskPriorities',taskPriorities);
   localStorage.setItem('taskDeadlines',taskDeadlines);
+  localStorage.setItem('taskStatus',taskStatus);
   localStorage.setItem('noTasks',noTasks);
 }
 
@@ -121,6 +123,9 @@ export function getLocalStorage(){
     let taskDeadlines = localStorage.getItem('taskDeadlines')
     taskDeadlines = taskDeadlines.split(',');
 
+    let taskStatus = localStorage.getItem('taskStatus')
+    taskStatus = taskStatus.split(',');
+    taskStatus = taskStatus.map((x) => x == 'true');
     //Create Project and Tasks
     
     //Add General
@@ -140,7 +145,7 @@ export function getLocalStorage(){
     //Add Event Listener to view Project
     viewProject(defaultProfile, document.querySelector(".sideboard > div:last-of-type h4:last-of-type"));
     for(let i = 0; i <noTasks[0];i++){
-      let currTask = createTask(task(taskNames[i],taskDescs[i],taskDeadlines[i],taskPriorities[i],getTaskID()));
+      let currTask = createTask(task(taskNames[i],taskDescs[i],taskDeadlines[i],taskPriorities[i],getTaskID(),taskStatus[i]));
       addTask(currTask,generalProject);
     }
 

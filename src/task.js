@@ -1,11 +1,6 @@
-export function task(name,desc,deadline,priority, id){
-  
-  let dateAdded = new Date();
-  
-  //Types: None, Ordered, Unordered. 
-  //Only applicable if there are subtasks.
-  let type = 'none';
-
+export function task(name,desc,deadline,priority, id,status = false){
+  let getStatus = () => status; //complete => true, incomplete => false
+  let setStatus = (finished) => {status = finished};
   let getName = () => name;
   let getDesc = () => desc;
   let getDeadline = () => deadline;
@@ -24,5 +19,5 @@ export function task(name,desc,deadline,priority, id){
       id = newID;
     }
   }
-  return {getName, getDesc, getDeadline, getPriority, getID, setName, setDesc, setDeadline, setPriority,setID}
+  return {getName, getDesc, getDeadline, getPriority, getID, getStatus, setName, setDesc, setDeadline, setPriority,setID,setStatus}
 }
