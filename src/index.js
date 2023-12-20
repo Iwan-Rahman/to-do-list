@@ -2,9 +2,9 @@ import  './style.css';
 import {task, subTask} from './task.js';
 import { createTask, deleteTask, getTask, editTask, addTask } from './taskDOM';
 import { project } from './project';
-import addProject, {deleteProject, deleteProjectFromLabel, editProject, viewProject } from './projectDOM';
+import addProject, {viewProject , createProject} from './projectDOM';
 import { popupProject, popupTask, closePopups, popUpHelp} from './popup';
-import { defaultProfile, updateProjects, updateUpcoming, setLocalStorage,getLocalStorage } from './profile';
+import { defaultProfile, updateProjects, setLocalStorage,getLocalStorage } from './profile';
 
 //videos
 import AddProjectVid from './videos/AddProject.gif';
@@ -32,14 +32,17 @@ let gridBtn = document.querySelectorAll("nav > ul:first-of-type > li");
 
 gridBtn[0].addEventListener("click",() => {
   gridSize = 4
+  document.querySelector('.sideboard > div:last-of-type h4').click();
 })
 
 gridBtn[1].addEventListener("click",() => {
   gridSize = 5
+  document.querySelector('.sideboard > div:last-of-type h4').click();
 })
 
 gridBtn[2].addEventListener("click",() => {
   gridSize = 6
+  document.querySelector('.sideboard > div:last-of-type h4').click();
 })
 
 //selected project
@@ -56,8 +59,6 @@ export let setDashboard = (bool) => {dashboardView = bool};
 //Call get Local Storage
 getLocalStorage();
 
-if(defaultProfile.getProjects() == 0){
-
   //Set Dashboard Listener
   let viewDashboard = ((profile) => {
     document.querySelector('.sideboard > div:last-of-type h4').addEventListener("click",() => {
@@ -66,18 +67,13 @@ if(defaultProfile.getProjects() == 0){
       for(let project of projectDisplays){
         project.remove();
       }
-
-      //Create Dashboard View
-      let projectDisplay = document.querySelector('.main').appendChild(generalProject.projectNode);
-      //Add all of the tasks in the project to the display
-      for(let task of generalProject.projectObj.getTasks()){
-        projectDisplay.appendChild(task.taskNode);
-      }
       updateProjects(profile)
       setDashboard(true);
     })
   })(defaultProfile);
 
+
+if(defaultProfile.getProjects() == 0){
     //Add General
     let projectContainer = document.querySelector(".sideboard > div:last-of-type > div");
     let generalProject = createProject(project("General"));

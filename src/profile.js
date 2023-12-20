@@ -66,7 +66,7 @@ function clearUpcomingDOM(){
 }
 
 export function updateProjects(profile){
-  for(let i = 1; i < profile.getProjects().length && i < gridSize; i++){
+  for(let i = 0; i < profile.getProjects().length && i < gridSize; i++){
     document.querySelector(".main").appendChild(profile.getProjects()[i].projectNode);
   }
 }

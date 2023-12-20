@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+
 * {
   padding: 0;
   margin: 0;
@@ -13,6 +15,8 @@
   --pastel-blue: 109, 194, 240;
   --pastel-red: 227, 130, 130;
   --pastel-yellow: 209, 176, 91;
+  --pastel-pink: 255, 170, 221;
+  --pastel-purple:169, 159, 227;
 }
 
 ::-webkit-scrollbar {
@@ -25,6 +29,7 @@ body {
   min-height: 100vh;
   display: grid;
   grid-template: max-content max-content 1fr / 5fr 1fr;
+  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
 }
 
 /* Header */
@@ -37,6 +42,8 @@ h1 {
   color: white;
   grid-column: 1 / 3;
   user-select: none;
+  font-family: 'Lobster', sans-serif;
+  font-weight: 400;
 }
 
 /* Nav */
@@ -109,8 +116,8 @@ nav button {
 .main {
   display: grid;
   grid-auto-flow: row;
-  grid-template-columns: repeat(auto-fit, minmax(25%,1fr));
-  grid-auto-columns: repeat(auto-fit, minmax(25%,1fr));
+  grid-template-columns: repeat(auto-fit, minmax(10%,1fr));
+  grid-auto-columns: repeat(auto-fit, minmax(10%,1fr));
   grid-auto-rows: minmax(50%,1fr);
   text-align: center;
   user-select: none;
@@ -133,20 +140,13 @@ nav button {
 }
 
 .main > div:nth-child(5) {
-  background-color: rgb(var(--pastel-green));
+  background-color: rgb(var(--pastel-purple));
 }
 
 .main > div:nth-child(6) {
-  background-color: rgb(var(--pastel-red));
+  background-color: rgb(var(--pastel-pink));
 }
 
-.main > div:nth-child(7) {
-  background-color: rgb(var(--pastel-blue));
-}
-
-.main > div:nth-child(8) {
-  background-color: rgb(var(--pastel-yellow));
-}
 
 .main h4 {
   font-weight: 600;
