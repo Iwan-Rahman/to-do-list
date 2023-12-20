@@ -4,7 +4,7 @@ import { createTask, deleteTask, getTask, editTask } from './taskDOM';
 import { project } from './project';
 import addProject, {deleteProject, deleteProjectFromLabel, editProject, viewProject } from './projectDOM';
 import { popupProject, popupTask, closePopups, popUpHelp} from './popup';
-import { defaultProfile, updateProjects, updateUpcoming } from './profile';
+import { defaultProfile, updateProjects, updateUpcoming, setLocalStorage,getLocalStorage } from './profile';
 
 //videos
 import AddProjectVid from './videos/AddProject.gif';
@@ -19,6 +19,7 @@ import DeleteTaskVid from './videos/DeleteTask.gif';
 popupProject();
 closePopups();
 popUpHelp();
+
 
 //ID
 let taskId = 0;
@@ -98,6 +99,9 @@ btnSubmitProject.addEventListener("click", () => {
       //Add Event Listener to view Project
       viewProject(defaultProfile, document.querySelector(".sideboard > div:last-of-type h4:last-of-type"));
     }
+
+    //Update Local Storage
+    setLocalStorage(defaultProfile);
   }
 );
 
@@ -135,6 +139,9 @@ btnSubmitTask.addEventListener("click", () => {
 
     //Update sideboard
     updateUpcoming(defaultProfile);
+
+    //update Local Storage
+    setLocalStorage(defaultProfile);
   }
 })
 
@@ -144,10 +151,12 @@ let mono = document.querySelector('nav > ul:last-of-type > li + li');
 
 classic.addEventListener("click", () => {
   document.body.classList.remove('mono');
+  setLocalStorage(defaultProfile)
 })
 
 mono.addEventListener("click", () => {
   document.body.classList.add('mono');
+  setLocalStorage(defaultProfile)
 })
 //Help View
 

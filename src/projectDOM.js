@@ -1,6 +1,6 @@
 import { project } from "./project";
 import { createTask, getTask } from "./taskDOM";
-import profile, {defaultProfile, updateUpcoming, updateProjects} from "./profile";
+import profile, {defaultProfile, updateUpcoming, updateProjects, setLocalStorage} from "./profile";
 import {deleteTask} from "./taskDOM";
 import {gridSize, getDashboard, setDashboard} from "./index"
 
@@ -38,6 +38,7 @@ export default function addProject(profile = defaultProfile, projectObj = getPro
   if(numProjects.length < gridSize && getDashboard() == true){
       projectsMain.appendChild(newProject.projectNode);
   }
+  setLocalStorage(profile);
   return newProject;
 }
 
@@ -51,6 +52,7 @@ export function deleteProject(profile=defaultProfile,project){
     e.target.remove();
     updateProjects(profile)
     updateUpcoming(profile);
+    setLocalStorage(profile)
   })
 }
 
@@ -110,6 +112,7 @@ export function deleteProjectFromLabel(profile=defaultProfile,projectLabel){
       updateProjects(profile);
     }
     updateUpcoming(profile);
+    setLocalStorage(profile);
 })
 }
 
@@ -131,5 +134,6 @@ export function editProject(profile=defaultProfile, project){
     //update content for task
     project.projectObj.setName(project.projectNode.querySelector("h4").textContent);
     projectLabel.textContent = project.projectObj.getName();
+    setLocalStorage(profile);
   }) 
 }

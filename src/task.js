@@ -10,8 +10,6 @@ export function task(name,desc,deadline,priority, id){
   let getDesc = () => desc;
   let getDeadline = () => deadline;
   let getPriority = () => priority;
-  let getDate = () => dateAdded;
-  let getType = () => type;
 
   //unique id to quickly identify tasks
   let getID = () => id;
@@ -20,12 +18,11 @@ export function task(name,desc,deadline,priority, id){
   let setDesc = newDesc => {desc = newDesc}
   let setDeadline = newDeadline => {deadline = newDeadline}
   let setPriority = newPriority => {priority = newPriority}
-  let setType = (newType) => {type = newType}
   let setID = newID => {
     //ID can only be assigned once
     if(id == undefined){
       id = newID;
     }
   }
-  return {getName, getDesc, getDeadline, getPriority, getDate, getType, getID, setName, setDesc, setDeadline, setPriority, setType, setID}
+  return {getName, getDesc, getDeadline, getPriority, getID, setName, setDesc, setDeadline, setPriority,setID}
 }

@@ -1,26 +1,21 @@
 import { task } from "./task";
 import { gridSize } from "./index";
 
-export let profile = (name, email, password) => {
-  let getName = () => name;
-  let getEmail = () => email;
-  let getPassword = () => password;
-
-  let projects = [];
+export let profile = (projects = []) => {
   let getProjects = () => projects
   let getAllTasks = () => {
     let tasks = [];
-    for(let project of projects){
+    for(let project of getProjects()){
       tasks.push(project.projectObj.getTasks());
     }
     tasks = tasks.flat();
     return tasks;
   }
   
-  return {getName, getEmail, getPassword, getProjects, getAllTasks,projects}
+  return {getProjects, getAllTasks}
 }
 
-export let defaultProfile = profile("User", "fake.email@fakemail.com", "");
+export let defaultProfile = profile();
 
 
 export function updateUpcoming(profile){
@@ -71,3 +66,37 @@ export function updateProjects(profile){
   }
 }
 
+
+export function setLocalStorage(profile){
+  //clear previous local storage
+  localStorage.clear();
+  //Flatten All Projects
+  let projectNames = profile.getProjects().map((x) => x.projectObj.getName() + ';;'); //;; is used as part of a delimter
+  let tasks = [];
+  for(let project of profile.getProjects()){
+    tasks.push(project.projectObj.getTasks());
+  }
+  let noTasks = tasks.map((x) => x.length);
+  tasks = tasks.flat();
+  let taskNames = tasks.map((x) => x.taskObj.getName() + ';;'); //;; is used as part of a delimter
+  let taskDescs = tasks.map((x) => x.taskObj.getDesc() + ';;');
+  let taskPriorities = tasks.map((x) => x.taskObj.getPriority() + ';;');
+  let taskDeadlines = tasks.map((x) => x.taskObj.getDeadline() + ';;');
+  localStorage.setItem('theme',document.body.classList.value);
+  localStorage.setItem('projectNames',projectNames);
+  localStorage.setItem('taskNames',taskNames);
+  localStorage.setItem('taskDescs',taskDescs);
+  localStorage.setItem('taskPriorities',taskPriorities);
+  localStorage.setItem('taskDeadlines',taskDeadlines);
+}
+
+export function getLocalStorage(){
+  try{
+    defaultProfile = localStorage.getItem('profile');
+    if(localStorage.getItem('theme') == 'mono'){
+      document.body.classList.add('mono');
+    }
+  }catch(err){ 
+    console.log('Local Storage is empty or not supported');
+  }
+}

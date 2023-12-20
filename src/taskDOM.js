@@ -1,5 +1,5 @@
 import {task, subTask} from './task.js';
-import { defaultProfile, updateUpcoming } from './profile';
+import { defaultProfile, setLocalStorage, updateUpcoming} from './profile';
 
 export function createTask(taskObj = task("","", new Date(),"Normal")){
   let taskNode = document.createElement("div");
@@ -47,6 +47,7 @@ export function getTask(){
 
 export function addTask(project){
   project.appendChild(createTask(getTask()));
+  setLocalStorage(defaultProfile);
 }
 
 export function deleteTask(task, project){
@@ -63,6 +64,8 @@ export function deleteTask(task, project){
         function checkID(currentTask){
           return currentTask.taskObj.getID() == task.taskObj.getID();
         }
+
+        setLocalStorage(defaultProfile);
       })
 }
 
@@ -105,6 +108,7 @@ export function editTask(task){
         task.taskObj.setDeadline(task.taskNode.querySelector("input[type='date']").value);
         task.taskNode.style.textDecoration = "none";
         updateUpcoming(defaultProfile);
+        setLocalStorage(defaultProfile);
       })
 
       //Displays a priority select input
