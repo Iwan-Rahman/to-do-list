@@ -1,5 +1,6 @@
-import {task, subTask} from './task.js';
+import {task} from './task.js';
 import { defaultProfile, setLocalStorage, updateUpcoming} from './profile';
+import { getSelectedProject, getTaskID , incTaskID} from './index.js';
 
 export function createTask(taskObj = task("","", new Date(),"Normal")){
   let taskNode = document.createElement("div");
@@ -45,8 +46,30 @@ export function getTask(){
   return task(taskName,taskDesc,taskDate,taskPriority);
 }
 
-export function addTask(project){
-  project.appendChild(createTask(getTask()));
+export function addTask(task){
+  task.taskObj.setID(getTaskID());
+  incTaskID();
+  task.taskNode.addEventListener("dblclick", (e) => {
+    e.stopPropagation();
+  })
+  task.taskNode.addEventListener("click", () => {
+    if(task.taskNode.style.textDecoration == "line-through"){
+      task.taskNode.style.textDecoration = "none";
+    }else{
+      task.taskNode.style.textDecoration = "line-through";
+    }
+  })
+  
+  //Appends task object to a list of task and a tasknode to the project node
+  getSelectedProject().projectNode.appendChild(task.taskNode);
+  getSelectedProject().projectObj.getTasks().push(task);
+
+  //create event listeners to delete and edit task
+  deleteTask(task, getSelectedProject());
+  editTask(task);
+  
+  //Update sideboard
+  updateUpcoming(defaultProfile);
   setLocalStorage(defaultProfile);
 }
 

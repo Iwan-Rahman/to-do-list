@@ -71,32 +71,54 @@ export function setLocalStorage(profile){
   //clear previous local storage
   localStorage.clear();
   //Flatten All Projects
-  let projectNames = profile.getProjects().map((x) => x.projectObj.getName() + ';;'); //;; is used as part of a delimter
+  let projectNames = profile.getProjects().map((x) => x.projectObj.getName()); //;; is used as part of a delimter
   let tasks = [];
   for(let project of profile.getProjects()){
     tasks.push(project.projectObj.getTasks());
   }
   let noTasks = tasks.map((x) => x.length);
   tasks = tasks.flat();
-  let taskNames = tasks.map((x) => x.taskObj.getName() + ';;'); //;; is used as part of a delimter
-  let taskDescs = tasks.map((x) => x.taskObj.getDesc() + ';;');
-  let taskPriorities = tasks.map((x) => x.taskObj.getPriority() + ';;');
-  let taskDeadlines = tasks.map((x) => x.taskObj.getDeadline() + ';;');
+  let taskNames = tasks.map((x) => x.taskObj.getName()); //;; is used as part of a delimter
+  let taskDescs = tasks.map((x) => x.taskObj.getDesc());
+  let taskPriorities = tasks.map((x) => x.taskObj.getPriority());
+  let taskDeadlines = tasks.map((x) => x.taskObj.getDeadline());
   localStorage.setItem('theme',document.body.classList.value);
   localStorage.setItem('projectNames',projectNames);
   localStorage.setItem('taskNames',taskNames);
   localStorage.setItem('taskDescs',taskDescs);
   localStorage.setItem('taskPriorities',taskPriorities);
   localStorage.setItem('taskDeadlines',taskDeadlines);
+  localStorage.setItem('noTasks',noTasks);
 }
 
 export function getLocalStorage(){
   try{
-    defaultProfile = localStorage.getItem('profile');
     if(localStorage.getItem('theme') == 'mono'){
       document.body.classList.add('mono');
     }
-  }catch(err){ 
+    //Add Projects
+    let projectNames = localStorage.getItem('projectNames');
+    projectNames = projectNames.split(',');
+    let noTasks = localStorage.getItem('noTasks');
+
+    //Add Tasks Info
+    let taskNames = localStorage.getItem('taskNames');
+    taskNames = taskNames.split(',');
+    console.log(taskNames);
+
+    let taskDescs = localStorage.getItem('taskDescs');
+    taskDescs = taskDescs.split(',');
+    console.log(taskDescs);
+
+    let taskPriorities = localStorage.getItem('taskPriorities');
+    taskPriorities = taskPriorities.split(',');
+    console.log(taskPriorities);
+    
+    let taskDeadlines = localStorage.getItem('taskDeadlines')
+    taskDeadlines = taskDeadlines.split(',');
+    console.log(taskDeadlines);
+
+  }catch(e){
     console.log('Local Storage is empty or not supported');
   }
 }

@@ -1,6 +1,6 @@
 import  './style.css';
 import {task, subTask} from './task.js';
-import { createTask, deleteTask, getTask, editTask } from './taskDOM';
+import { createTask, deleteTask, getTask, editTask, addTask } from './taskDOM';
 import { project } from './project';
 import addProject, {deleteProject, deleteProjectFromLabel, editProject, viewProject } from './projectDOM';
 import { popupProject, popupTask, closePopups, popUpHelp} from './popup';
@@ -19,11 +19,13 @@ import DeleteTaskVid from './videos/DeleteTask.gif';
 popupProject();
 closePopups();
 popUpHelp();
+getLocalStorage();
 
 
 //ID
-let taskId = 0;
-let projectId = 0;
+export let taskId = 0;
+export let getTaskID = () => taskId;
+export let incTaskID = () => {taskId++};
 
 
 //Dashboard View
@@ -51,7 +53,9 @@ let viewDashboard = ((profile) => {
   })
 })(defaultProfile);
 //The current selected project when the new task form is displayed
-let selectedProject;
+export let selectedProject;
+export let getSelectedProject = () => selectedProject;
+export let setSelectedProject = (project) => {selectedProject = project}; 
 
 //Change Grid size
 export let gridSize = 4;
@@ -74,7 +78,7 @@ gridBtn[2].addEventListener("click",() => {
 
 
 //Add tasks to general
-let generalProject = addProject(defaultProfile, project("General","",'',projectId++));
+let generalProject = addProject(defaultProfile, project("General","",''));
 generalProject.projectNode.addEventListener("dblclick", () => {
 document.querySelector(".popup").style.visibility = "visible";
 selectedProject = generalProject;
@@ -89,19 +93,7 @@ btnSubmitProject.addEventListener("click", () => {
   if(document.querySelector(".popup:nth-of-type(4) form").checkValidity()){
     //A new project is able to be added to main
       let project  = addProject();
-      project.id = projectId++;
-      popupTask(project.projectNode);
-      selectedProject = project;
-      //Create Event Listeners to delete/edit a project
-      deleteProject(defaultProfile,project);
-      editProject(defaultProfile,project);
-      deleteProjectFromLabel(defaultProfile,document.querySelector(".sideboard > div:last-of-type h4:last-of-type"));
-      //Add Event Listener to view Project
-      viewProject(defaultProfile, document.querySelector(".sideboard > div:last-of-type h4:last-of-type"));
     }
-
-    //Update Local Storage
-    setLocalStorage(defaultProfile);
   }
 );
 
@@ -111,37 +103,7 @@ btnSubmitTask.addEventListener("click", () => {
   //Checks if all of the html form requirements are filled
   if(document.querySelector("form").checkValidity()){
     let task = createTask(getTask());
-    task.taskObj.setID(taskId++);
-    task.taskNode.addEventListener("dblclick", (e) => {
-      e.stopPropagation();
-    })
-    task.taskNode.addEventListener("mouseenter",(e) => {
-      task.taskNode.style.backgroundColor = "thistle";
-    })
-    task.taskNode.addEventListener("mouseleave",(e) => {
-      task.taskNode.style.backgroundColor = "white";
-    })
-    task.taskNode.addEventListener("click", () => {
-      if(task.taskNode.style.textDecoration == "line-through"){
-        task.taskNode.style.textDecoration = "none";
-      }else{
-        task.taskNode.style.textDecoration = "line-through";
-      }
-    })
-
-    //Appends task object to a list of task and a tasknode to the project node
-    selectedProject.projectNode.appendChild(task.taskNode);
-    selectedProject.projectObj.getTasks().push(task);
-
-    //create event listeners to delete and edit task
-    deleteTask(task, selectedProject);
-    editTask(task);
-
-    //Update sideboard
-    updateUpcoming(defaultProfile);
-
-    //update Local Storage
-    setLocalStorage(defaultProfile);
+    addTask(task);
   }
 })
 

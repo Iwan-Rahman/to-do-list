@@ -230,6 +230,9 @@ form button {
   border-radius: 50%;
 }
 
+.main .task:hover {
+  background-color: thistle;
+}
 /* Help Screen */
 
 .popup > div a {
@@ -324,6 +327,7 @@ form button {
 
 .mono .main h4 {
   color: whitesmoke;
+  text-decoration-color: whitesmoke;
 }
 
 .mono .task {
@@ -345,3 +349,13 @@ form button {
 .mono svg {
   fill: black;
 }
+
+.mono .main .task:hover {
+  background-color: whitesmoke;
+  
+}
+.mono .main .task:hover h4 {
+  color: black;
+  
+}
+
