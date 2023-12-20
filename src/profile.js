@@ -1,5 +1,10 @@
-import { task } from "./task";
-import { gridSize } from "./index";
+import {task}  from "./task";
+import { getTaskID, gridSize} from "./index";
+import { project } from "./project";
+import addProject, { createProject, viewProject } from "./projectDOM";
+import { addTask, createTask } from "./taskDOM";
+import { setDashboard, getDashboard } from "./index";
+import { popupTask } from "./popup";
 
 export let profile = (projects = []) => {
   let getProjects = () => projects
@@ -93,6 +98,7 @@ export function setLocalStorage(profile){
 
 export function getLocalStorage(){
   try{
+    setDashboard(true);
     if(localStorage.getItem('theme') == 'mono'){
       document.body.classList.add('mono');
     }
@@ -100,6 +106,7 @@ export function getLocalStorage(){
     let projectNames = localStorage.getItem('projectNames');
     projectNames = projectNames.split(',');
     let noTasks = localStorage.getItem('noTasks');
+    noTasks = noTasks.split(',');
 
     //Add Tasks Info
     let taskNames = localStorage.getItem('taskNames');
@@ -118,6 +125,38 @@ export function getLocalStorage(){
     taskDeadlines = taskDeadlines.split(',');
     console.log(taskDeadlines);
 
+    //Create Project and Tasks
+    
+    //Add General
+    let projectContainer = document.querySelector(".sideboard > div:last-of-type > div");
+    let generalProject = createProject(project("General"));
+    generalProject.projectNode.addEventListener("dblclick", () => {
+    document.querySelector(".popup").style.visibility = "visible";
+    })
+    let projectName = document.createElement("h4");
+    projectName.textContent = generalProject.projectObj.getName();
+    projectContainer.appendChild(projectName);
+    defaultProfile.getProjects().push(generalProject);
+    let projectsMain = document.querySelector(".main");
+    projectsMain.appendChild(generalProject.projectNode);
+    //Create Event Listener to add tasks to project
+    popupTask(generalProject);
+    //Add Event Listener to view Project
+    viewProject(defaultProfile, document.querySelector(".sideboard > div:last-of-type h4:last-of-type"));
+    for(let i = 0; i <noTasks[0];i++){
+      let currTask = createTask(task(taskNames[i],taskDescs[i],taskDeadlines[i],taskPriorities[i],getTaskID()));
+      addTask(currTask,generalProject);
+    }
+
+    //Iterate through number of projects excluding general. Keep a total count of all tasks
+    for(let i = 1, k=noTasks[0]; i < projectNames.length; i++){
+      let currProject = project(projectNames[i]);
+      currProject = addProject(defaultProfile,currProject);
+      for(let j = 0; j < noTasks[i]; j++,k++){
+        let currTask = createTask(task(taskNames[k],taskDescs[k],taskDeadlines[k],taskPriorities[k],getTaskID()));
+        addTask(currTask,currProject);
+      }
+    }
   }catch(e){
     console.log('Local Storage is empty or not supported');
   }

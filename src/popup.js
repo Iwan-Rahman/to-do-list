@@ -1,3 +1,5 @@
+import {setSelectedProject} from './index.js';
+
 export function popupProject(){
 
   //Trigger popup form for project
@@ -33,10 +35,11 @@ export function closePopups(){
       document.querySelector(".popup:last-of-type").style.visibility = "hidden";
   })
 }
-export function popupTask(projectNode){
-  projectNode.addEventListener("dblclick", (e) => {
+export function popupTask(project){
+  project.projectNode.addEventListener("dblclick", (e) => {
     document.querySelector(".popup").style.visibility = "visible";
-    })
+    setSelectedProject(project);
+  })
 }
 
 export function popUpHelp(){

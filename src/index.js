@@ -19,49 +19,16 @@ import DeleteTaskVid from './videos/DeleteTask.gif';
 popupProject();
 closePopups();
 popUpHelp();
-getLocalStorage();
-
 
 //ID
 export let taskId = 0;
 export let getTaskID = () => taskId;
 export let incTaskID = () => {taskId++};
 
-
-//Dashboard View
-let dashboardView = true;
-export let getDashboard = () => dashboardView;
-export let setDashboard = (bool) => {dashboardView = bool};
-
-//Set Dashboard Listener
-let viewDashboard = ((profile) => {
-  document.querySelector('.sideboard > div:last-of-type h4').addEventListener("click",() => {
-    let projectDisplays = document.querySelectorAll('.main > .project');
-    //Remove all projects in main
-    for(let project of projectDisplays){
-      project.remove();
-    }
-
-    //Create Dashboard View
-    let projectDisplay = document.querySelector('.main').appendChild(generalProject.projectNode);
-    //Add all of the tasks in the project to the display
-    for(let task of generalProject.projectObj.getTasks()){
-      projectDisplay.appendChild(task.taskNode);
-    }
-    updateProjects(profile)
-    setDashboard(true);
-  })
-})(defaultProfile);
-//The current selected project when the new task form is displayed
-export let selectedProject;
-export let getSelectedProject = () => selectedProject;
-export let setSelectedProject = (project) => {selectedProject = project}; 
-
 //Change Grid size
 export let gridSize = 4;
 
 let gridBtn = document.querySelectorAll("nav > ul:first-of-type > li");
-
 
 gridBtn[0].addEventListener("click",() => {
   gridSize = 4
@@ -75,17 +42,58 @@ gridBtn[2].addEventListener("click",() => {
   gridSize = 6
 })
 
+//selected project
+let selectedProject;
+let getSelectedProject = () => selectedProject;
+export let setSelectedProject = (project) => {selectedProject = project}; 
+
+//Dashboard View
+let dashboardView = true;
+export let getDashboard = () => dashboardView;
+export let setDashboard = (bool) => {dashboardView = bool};
 
 
-//Add tasks to general
-let generalProject = addProject(defaultProfile, project("General","",''));
-generalProject.projectNode.addEventListener("dblclick", () => {
-document.querySelector(".popup").style.visibility = "visible";
-selectedProject = generalProject;
-})
-viewProject(defaultProfile, document.querySelector(".sideboard > div:last-of-type h4:last-of-type"));
+//Call get Local Storage
+getLocalStorage();
 
+if(defaultProfile.getProjects() == 0){
 
+  //Set Dashboard Listener
+  let viewDashboard = ((profile) => {
+    document.querySelector('.sideboard > div:last-of-type h4').addEventListener("click",() => {
+      let projectDisplays = document.querySelectorAll('.main > .project');
+      //Remove all projects in main
+      for(let project of projectDisplays){
+        project.remove();
+      }
+
+      //Create Dashboard View
+      let projectDisplay = document.querySelector('.main').appendChild(generalProject.projectNode);
+      //Add all of the tasks in the project to the display
+      for(let task of generalProject.projectObj.getTasks()){
+        projectDisplay.appendChild(task.taskNode);
+      }
+      updateProjects(profile)
+      setDashboard(true);
+    })
+  })(defaultProfile);
+
+    //Add General
+    let projectContainer = document.querySelector(".sideboard > div:last-of-type > div");
+    let generalProject = createProject(project("General"));
+    generalProject.projectNode.addEventListener("dblclick", () => {
+    document.querySelector(".popup").style.visibility = "visible";
+    })
+    let projectName = document.createElement("h4");
+    projectName.textContent = generalProject.projectObj.getName();
+    projectContainer.appendChild(projectName);
+    defaultProfile.getProjects().push(generalProject);
+
+    //Create Event Listener to add tasks to project
+    popupTask(generalProject);
+    //Add Event Listener to view Project
+    viewProject(defaultProfile, document.querySelector(".sideboard > div:last-of-type h4:last-of-type"));
+}
 
 let btnSubmitProject = document.querySelector(".popup:nth-of-type(4) button");
 btnSubmitProject.addEventListener("click", () => {
@@ -93,6 +101,7 @@ btnSubmitProject.addEventListener("click", () => {
   if(document.querySelector(".popup:nth-of-type(4) form").checkValidity()){
     //A new project is able to be added to main
       let project  = addProject();
+      setLocalStorage(defaultProfile);
     }
   }
 );
@@ -103,7 +112,8 @@ btnSubmitTask.addEventListener("click", () => {
   //Checks if all of the html form requirements are filled
   if(document.querySelector("form").checkValidity()){
     let task = createTask(getTask());
-    addTask(task);
+    addTask(task,getSelectedProject());
+    setLocalStorage(defaultProfile);
   }
 })
 
@@ -120,8 +130,8 @@ mono.addEventListener("click", () => {
   document.body.classList.add('mono');
   setLocalStorage(defaultProfile)
 })
-//Help View
 
+//Help View
 const addProjectGIF = new Image();
 addProjectGIF.src = AddProjectVid
 document.querySelector('#helpAdd + div').appendChild(addProjectGIF);

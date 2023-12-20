@@ -2,7 +2,7 @@ import { project } from "./project";
 import { createTask, getTask } from "./taskDOM";
 import profile, {defaultProfile, updateUpcoming, updateProjects, setLocalStorage} from "./profile";
 import {deleteTask} from "./taskDOM";
-import {gridSize, getDashboard, setDashboard, setSelectedProject} from "./index"
+import {gridSize, getDashboard, setDashboard} from "./index"
 import { popupTask } from "./popup";
 
 export function createProject(projectObj = project("")){
@@ -39,17 +39,14 @@ export default function addProject(profile = defaultProfile, projectObj = getPro
   if(numProjects.length < gridSize && getDashboard() == true){
       projectsMain.appendChild(newProject.projectNode);
   }
-
   //Create Event Listener to add tasks to project
-  popupTask(newProject.projectNode);
+  popupTask(newProject);
   //Create Event Listeners to delete/edit a project
   deleteProject(defaultProfile,newProject);
   editProject(defaultProfile,newProject);
   deleteProjectFromLabel(defaultProfile,document.querySelector(".sideboard > div:last-of-type h4:last-of-type"));
   //Add Event Listener to view Project
   viewProject(defaultProfile, document.querySelector(".sideboard > div:last-of-type h4:last-of-type"));
-  setSelectedProject(newProject);
-  setLocalStorage(profile);
   return newProject;
 }
 
