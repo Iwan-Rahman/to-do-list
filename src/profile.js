@@ -111,19 +111,15 @@ export function getLocalStorage(){
     //Add Tasks Info
     let taskNames = localStorage.getItem('taskNames');
     taskNames = taskNames.split(',');
-    console.log(taskNames);
 
     let taskDescs = localStorage.getItem('taskDescs');
     taskDescs = taskDescs.split(',');
-    console.log(taskDescs);
 
     let taskPriorities = localStorage.getItem('taskPriorities');
     taskPriorities = taskPriorities.split(',');
-    console.log(taskPriorities);
     
     let taskDeadlines = localStorage.getItem('taskDeadlines')
     taskDeadlines = taskDeadlines.split(',');
-    console.log(taskDeadlines);
 
     //Create Project and Tasks
     

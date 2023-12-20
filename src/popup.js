@@ -5,10 +5,10 @@ export function popupProject(){
   //Trigger popup form for project
   let newProject = document.querySelector("nav button");
   newProject.addEventListener("click", () => {
-    document.querySelector("div:nth-of-type(4)").style.visibility = "visible";
+    document.querySelector(".projectForm").style.visibility = "visible";
   })
   
-  document.querySelector("div:nth-of-type(4) form").addEventListener("click", (e) => {
+  document.querySelector(".projectForm form").addEventListener("click", (e) => {
     e.stopPropagation();
   });
 }
@@ -16,13 +16,13 @@ export function popupProject(){
 export function closePopups(){
   //Close project popup
   //.popup functions as div in the query selector. Left as popup for readability
-  document.querySelector("div:nth-of-type(4)").addEventListener("click", () => {  
-    document.querySelector("div:nth-of-type(4)").style.visibility = "hidden";
+  document.querySelector(".projectForm").addEventListener("click", () => {  
+    document.querySelector(".projectForm").style.visibility = "hidden";
   })
 
   //Close task popup
-  document.querySelector(".popup").addEventListener("click", () => {
-    document.querySelector(".popup").style.visibility = "hidden";
+  document.querySelector(".taskForm").addEventListener("click", () => {
+    document.querySelector(".taskForm").style.visibility = "hidden";
   })
 
   //Prevent task popup from closing when clicking on forms
@@ -51,6 +51,6 @@ export function popUpHelp(){
   });
 
   helpBtn.addEventListener("click", () => {
-    document.querySelector('div:nth-of-type(5)').style.visibility = 'visible'
+    document.querySelector('.help').style.visibility = 'visible'
   })
 }
