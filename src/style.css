@@ -36,6 +36,7 @@ h1 {
   background-color: rgb(var(--title-bg-color));
   color: white;
   grid-column: 1 / 3;
+  user-select: none;
 }
 
 /* Nav */

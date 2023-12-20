@@ -88,7 +88,8 @@ if(defaultProfile.getProjects() == 0){
     projectName.textContent = generalProject.projectObj.getName();
     projectContainer.appendChild(projectName);
     defaultProfile.getProjects().push(generalProject);
-
+    let projectsMain = document.querySelector(".main");
+    projectsMain.appendChild(generalProject.projectNode);
     //Create Event Listener to add tasks to project
     popupTask(generalProject);
     //Add Event Listener to view Project
@@ -102,6 +103,7 @@ btnSubmitProject.addEventListener("click", () => {
     //A new project is able to be added to main
       let project  = addProject();
       setLocalStorage(defaultProfile);
+      document.querySelector('#projectName').value = ''; //clear name
     }
   }
 );
@@ -114,6 +116,10 @@ btnSubmitTask.addEventListener("click", () => {
     let task = createTask(getTask());
     addTask(task,getSelectedProject());
     setLocalStorage(defaultProfile);
+    document.querySelector('#taskName').value = ''; //clear name
+    document.querySelector('#taskDesc').value = ''; //clear desc
+    document.querySelector('#taskDate').value = ''; //clear date
+    document.querySelector('#taskPriority').value = 'low';//reset priority
   }
 })
 
