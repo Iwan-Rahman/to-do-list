@@ -31,8 +31,8 @@ export function closePopups(){
   });
 
   //Close help popup
-    document.querySelector(".popup.help").addEventListener("click", () => {
-      document.querySelector(".popup.help").style.visibility = "hidden";
+    document.querySelector(".help").addEventListener("click", () => {
+      document.querySelector(".help").style.visibility = "hidden";
   })
 }
 export function popupTask(project){
