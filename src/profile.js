@@ -154,7 +154,7 @@ export function getLocalStorage(){
       let currProject = project(projectNames[i]);
       currProject = addProject(defaultProfile,currProject);
       for(let j = 0; j < noTasks[i]; j++,k++){
-        let currTask = createTask(task(taskNames[k],taskDescs[k],taskDeadlines[k],taskPriorities[k],getTaskID()));
+        let currTask = createTask(task(taskNames[k],taskDescs[k],taskDeadlines[k],taskPriorities[k],getTaskID(),taskStatus[k]));
         addTask(currTask,currProject);
       }
     }

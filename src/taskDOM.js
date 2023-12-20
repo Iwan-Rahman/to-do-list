@@ -56,10 +56,12 @@ export function addTask(task,project){
       task.taskNode.style.textDecoration = "none";
       task.taskObj.setStatus(false);
       setLocalStorage(defaultProfile);
+      updateUpcoming(defaultProfile);
     }else{
       task.taskNode.style.textDecoration = "line-through";
       task.taskObj.setStatus(true);
       setLocalStorage(defaultProfile);
+      updateUpcoming(defaultProfile);
     }
   })
 
@@ -134,7 +136,6 @@ export function editTask(task){
         //update content for task
         task.taskObj.setName(task.taskNode.querySelector("h4").textContent);
         task.taskObj.setDesc(task.taskNode.querySelector("p").textContent);
-        task.taskObj.setPriority(task.taskNode.querySelector("div").textContent);
         task.taskObj.setDeadline(task.taskNode.querySelector("input[type='date']").value);
         task.taskNode.style.textDecoration = "none";
         updateUpcoming(defaultProfile);
@@ -147,12 +148,15 @@ export function editTask(task){
         switch(priority.value){
           case 'low':
             task.taskNode.querySelector("div").style.backgroundColor = 'green';
+            task.taskObj.setPriority('low');
             break;
           case 'moderate':
             task.taskNode.querySelector("div").style.backgroundColor = 'yellow';
+            task.taskObj.setPriority('moderate');
             break;
           case 'high':
             task.taskNode.querySelector("div").style.backgroundColor = 'red';
+            task.taskObj.setPriority('high');
             break;
         }
         priority.remove();
