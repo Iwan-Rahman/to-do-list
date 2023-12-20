@@ -5,10 +5,10 @@ export function popupProject(){
   //Trigger popup form for project
   let newProject = document.querySelector("nav button");
   newProject.addEventListener("click", () => {
-    document.querySelector(".popup:nth-of-type(4)").style.visibility = "visible";
+    document.querySelector("div:nth-of-type(4)").style.visibility = "visible";
   })
   
-  document.querySelector(".popup:nth-of-type(4) form").addEventListener("click", (e) => {
+  document.querySelector("div:nth-of-type(4) form").addEventListener("click", (e) => {
     e.stopPropagation();
   });
 }
@@ -16,8 +16,8 @@ export function popupProject(){
 export function closePopups(){
   //Close project popup
   //.popup functions as div in the query selector. Left as popup for readability
-  document.querySelector(".popup:nth-of-type(4)").addEventListener("click", () => {  
-    document.querySelector(".popup:nth-of-type(4)").style.visibility = "hidden";
+  document.querySelector("div:nth-of-type(4)").addEventListener("click", () => {  
+    document.querySelector("div:nth-of-type(4)").style.visibility = "hidden";
   })
 
   //Close task popup
@@ -31,8 +31,8 @@ export function closePopups(){
   });
 
   //Close help popup
-    document.querySelector(".popup:last-of-type").addEventListener("click", () => {
-      document.querySelector(".popup:last-of-type").style.visibility = "hidden";
+    document.querySelector("div:last-of-type").addEventListener("click", () => {
+      document.querySelector("div:last-of-type").style.visibility = "hidden";
   })
 }
 export function popupTask(project){
